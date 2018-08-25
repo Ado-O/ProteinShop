@@ -1,4 +1,4 @@
-package com.example.user.lesson_android_development.main.horizontal;
+package com.example.user.lesson_android_development.main.bestselling;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -6,18 +6,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.example.user.lesson_android_development.R;
-import com.example.user.lesson_android_development.data.SingleHorizontal;
-import com.example.user.lesson_android_development.databinding.HorizontalSingleRowBinding;
+import com.example.user.lesson_android_development.data.Shop;
+import com.example.user.lesson_android_development.databinding.BestSellingItemBinding;
 
 import java.util.ArrayList;
 
-public class HorizontalAdapter extends RecyclerView.Adapter {
+public class BestSellingAdapter extends RecyclerView.Adapter {
 
-    ArrayList<SingleHorizontal> data;
+    ArrayList<Shop> data;
     private LayoutInflater mInflater;
 
-    public HorizontalAdapter(Context context, ArrayList<SingleHorizontal> dataLIst) {
+    public BestSellingAdapter(Context context, ArrayList<Shop> dataLIst) {
 
         mInflater = LayoutInflater.from(context);
         data = dataLIst;
@@ -27,7 +26,7 @@ public class HorizontalAdapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new HorizontalViewHolder(HorizontalSingleRowBinding.inflate(
+        return new BestSellingViewHolder(BestSellingItemBinding.inflate(
                mInflater,
                 parent,
                 false));
@@ -35,7 +34,7 @@ public class HorizontalAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ((HorizontalViewHolder) holder).setup(data.get(position));
+        ((BestSellingViewHolder) holder).setup(data.get(position));
     }
 
     @Override

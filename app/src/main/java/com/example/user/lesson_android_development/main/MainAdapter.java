@@ -9,109 +9,103 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.user.lesson_android_development.R;
-import com.example.user.lesson_android_development.data.SingleHorizontal;
-import com.example.user.lesson_android_development.data.SingleVertical;
-import com.example.user.lesson_android_development.main.horizontal.HorizontalAdapter;
-import com.example.user.lesson_android_development.main.vertical.VerticalAdapter;
+import com.example.user.lesson_android_development.data.Shop;
+import com.example.user.lesson_android_development.main.bestselling.BestSellingAdapter;
+import com.example.user.lesson_android_development.main.stacks.StacksAdapter;
 
 import java.util.ArrayList;
 
-import static com.example.user.lesson_android_development.main.MainActivity.getHorizontalData;
-import static com.example.user.lesson_android_development.main.MainActivity.getVerticalData;
+import static com.example.user.lesson_android_development.main.MainActivity.getBestSelling;
+import static com.example.user.lesson_android_development.main.MainActivity.getStacks;
 
 public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private Context context;
-    private ArrayList<Object> items;
-    private final int VERTICAL = 1;
-    private final int HORIZONTAL = 2;
+    private final int BESTSELLING = 1;
+    private final int STACKS = 2;
 
-    public MainAdapter(Context context, ArrayList<Object> items) {
-        this.context = context;
-        this.items = items;
+    private LayoutInflater mInflater;
+    private Context mContext;
+    private ArrayList<Shop> mList;
+
+
+    public MainAdapter(Context context, ArrayList<Shop> list) {
+        mInflater = LayoutInflater.from(context);
+        mContext = context;
+        mList = list;
     }
 
     //this method returns the number according to the Vertical/Horizontal object
     @Override
     public int getItemViewType(int position) {
-        if (items.get(position) instanceof SingleVertical)
-            return VERTICAL;
-        if (items.get(position) instanceof SingleHorizontal)
-            return HORIZONTAL;
-        return -1;
+        if (position == 0) {
+            return BESTSELLING;
+        } else {
+            return STACKS;
+        }
     }
 
     //this method returns the holder that we've inflated according to the viewtype.
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View view;
-        RecyclerView.ViewHolder holder;
-        switch (viewType) {
-            case VERTICAL:
-                view = inflater.inflate(R.layout.vertical, parent, false);
-                holder = new VerticalViewHolder(view);
-                break;
-            case HORIZONTAL:
-                view = inflater.inflate(R.layout.horizontal, parent, false);
-                holder = new HorizontalViewHolder(view);
-                break;
-
-            default:
-                view = inflater.inflate(R.layout.horizontal, parent, false);
-                holder = new HorizontalViewHolder(view);
-                break;
+        if (viewType == BESTSELLING) {
+            return new BestSellingView(mInflater.inflate(
+                    R.layout.best_selling_item,
+                    parent,
+                    false));
+        } else if (viewType == STACKS) {
+            return new StacksView(mInflater.inflate(
+                    R.layout.stacks_item,
+                    parent,
+                    false));
+        } else {
+            throw new RuntimeException("The type has to be ONE or TWO");
         }
 
-
-        return holder;
     }
 
     //here we bind view with data according to the position that we have defined.
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (holder.getItemViewType() == VERTICAL)
-            verticalView((VerticalViewHolder) holder);
-        else if (holder.getItemViewType() == HORIZONTAL)
-            horizontalView((HorizontalViewHolder) holder);
+        if (holder.getItemViewType() == BESTSELLING)
+            bestSellingView((BestSellingView) holder);
+        else if (holder.getItemViewType() == STACKS)
+            stacksView((StacksView) holder);
     }
 
-    private void verticalView(VerticalViewHolder holder) {
-
-        VerticalAdapter adapter1 = new VerticalAdapter(context, getVerticalData());
-        holder.recyclerView.setLayoutManager(new GridLayoutManager(context, 2));
-        holder.recyclerView.setAdapter(adapter1);
-    }
-
-
-    private void horizontalView(HorizontalViewHolder holder) {
-        HorizontalAdapter adapter = new HorizontalAdapter(context, getHorizontalData());
-        holder.recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
+    private void bestSellingView(BestSellingView holder) {
+        BestSellingAdapter adapter = new BestSellingAdapter(mContext, getBestSelling());
+        holder.recyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
         holder.recyclerView.setAdapter(adapter);
+    }
+
+    private void stacksView(StacksView holder) {
+
+        StacksAdapter adapter1 = new StacksAdapter(mContext, getStacks());
+        holder.recyclerView.setLayoutManager(new GridLayoutManager(mContext, 2));
+        holder.recyclerView.setAdapter(adapter1);
     }
 
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return mList.size();
     }
 
-    public class HorizontalViewHolder extends RecyclerView.ViewHolder {
-
+    public class BestSellingView extends RecyclerView.ViewHolder {
         RecyclerView recyclerView;
 
-        HorizontalViewHolder(View itemView) {
+        BestSellingView(View itemView) {
             super(itemView);
-            recyclerView = (RecyclerView) itemView.findViewById(R.id.inner_recyclerView);
+            recyclerView = (RecyclerView) itemView.findViewById(R.id.rv_bestSelling);
         }
     }
 
-    public class VerticalViewHolder extends RecyclerView.ViewHolder {
+    public class StacksView extends RecyclerView.ViewHolder {
         RecyclerView recyclerView;
 
-        VerticalViewHolder(View itemView) {
+        StacksView(View itemView) {
             super(itemView);
-            recyclerView = (RecyclerView) itemView.findViewById(R.id.inner_recyclerView);
+            recyclerView = (RecyclerView) itemView.findViewById(R.id.rv_stacks);
         }
     }
 }

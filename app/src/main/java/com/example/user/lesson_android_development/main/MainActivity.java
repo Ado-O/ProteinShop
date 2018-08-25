@@ -8,13 +8,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
 import com.example.user.lesson_android_development.R;
-import com.example.user.lesson_android_development.data.SingleHorizontal;
-import com.example.user.lesson_android_development.data.SingleVertical;
+import com.example.user.lesson_android_development.data.Shop;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<Object> objects = new ArrayList<>();
     private Toolbar mToolbar;
 
     @Override
@@ -25,7 +24,11 @@ public class MainActivity extends AppCompatActivity {
         mToolbar = findViewById(R.id.tb_main);
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_View);
 
-        MainAdapter adapter = new MainAdapter(this, getObject());
+        ArrayList<Shop> objects = new ArrayList<>();
+        objects.add(getBestSelling().get(0));
+        objects.add(getStacks().get(0));
+
+        MainAdapter adapter = new MainAdapter(this, objects);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
@@ -64,37 +67,23 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    private ArrayList<Object> getObject() {
-        objects.add(getHorizontalData().get(0));
-        objects.add(getVerticalData().get(0));
-        return objects;
+    public static ArrayList<Shop> getBestSelling() {
+
+        ArrayList<Shop> bestSelling = new ArrayList<>();
+        bestSelling.add(new Shop(R.drawable.image_1, "Stacks"));
+        bestSelling.add(new Shop(R.drawable.image_1, "Stacks"));
+        bestSelling.add(new Shop(R.drawable.image_1, "Stacks"));
+        return bestSelling;
     }
 
-    public static ArrayList<SingleVertical> getVerticalData() {
+    public static ArrayList<Shop> getStacks() {
 
-       ArrayList<SingleVertical> singleVerticals = new ArrayList<>();
-        singleVerticals.add(new SingleVertical("Jim Carrey", R.drawable.image_1));
-        singleVerticals.add(new SingleVertical("Jim Carrey", R.drawable.image_1));
-        singleVerticals.add(new SingleVertical("Jim Carrey", R.drawable.image_1));
-        singleVerticals.add(new SingleVertical("Jim Carrey", R.drawable.image_1));
-        singleVerticals.add(new SingleVertical("Jim Carrey", R.drawable.image_1));
-        singleVerticals.add(new SingleVertical("Jim Carrey", R.drawable.image_1));
-        return singleVerticals;
+       ArrayList<Shop> stacks = new ArrayList<>();
+        stacks.add(new Shop(R.drawable.image_1, "Stacks"));
+        stacks.add(new Shop(R.drawable.image_1, "Stacks"));
+        stacks.add(new Shop(R.drawable.image_1, "Stacks"));
+        return stacks;
     }
-
-
-    public static ArrayList<SingleHorizontal> getHorizontalData() {
-
-        ArrayList<SingleHorizontal> singleHorizontals = new ArrayList<>();
-        singleHorizontals.add(new SingleHorizontal("Jim Carrey", R.drawable.image_1));
-        singleHorizontals.add(new SingleHorizontal("Jim Carrey", R.drawable.image_1));
-        singleHorizontals.add(new SingleHorizontal("Jim Carrey", R.drawable.image_1));
-        singleHorizontals.add(new SingleHorizontal("Jim Carrey", R.drawable.image_1));
-        singleHorizontals.add(new SingleHorizontal("Jim Carrey", R.drawable.image_1));
-        singleHorizontals.add(new SingleHorizontal("Jim Carrey", R.drawable.image_1));
-        return singleHorizontals;
-    }
-
 
 }
 

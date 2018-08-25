@@ -1,20 +1,12 @@
 package com.example.user.lesson_android_development.data;
 
-public class SingleHorizontal {
+public class Shop {
 
-    private String title;
     private int image;
+    private String title;
 
-    public SingleHorizontal(String title, int image) {
-        this.title = title;
+    public Shop(int image, String title) {
         this.image = image;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
         this.title = title;
     }
 
@@ -24,5 +16,13 @@ public class SingleHorizontal {
 
     public void setImage(int image) {
         this.image = image;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

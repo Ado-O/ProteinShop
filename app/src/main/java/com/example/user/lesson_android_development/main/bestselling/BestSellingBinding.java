@@ -1,11 +1,11 @@
-package com.example.user.lesson_android_development.main.horizontal;
+package com.example.user.lesson_android_development.main.bestselling;
 
 import android.databinding.BindingAdapter;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
-public class HorizontalBinding {
+public class BestSellingBinding {
 
 
     //image
