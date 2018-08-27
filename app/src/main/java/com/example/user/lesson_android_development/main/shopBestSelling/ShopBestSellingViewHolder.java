@@ -1,11 +1,9 @@
-package com.example.user.lesson_android_development.main;
+package com.example.user.lesson_android_development.main.shopBestSelling;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 
-import com.example.user.lesson_android_development.R;
 import com.example.user.lesson_android_development.data.Shop;
 import com.example.user.lesson_android_development.databinding.ShopBestSellingItemBinding;
 

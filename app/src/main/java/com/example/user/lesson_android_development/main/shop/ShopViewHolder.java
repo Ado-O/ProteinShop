@@ -1,4 +1,4 @@
-package com.example.user.lesson_android_development.main;
+package com.example.user.lesson_android_development.main.shop;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;

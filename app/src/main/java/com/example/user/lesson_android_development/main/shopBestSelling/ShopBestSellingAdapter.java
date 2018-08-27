@@ -1,4 +1,4 @@
-package com.example.user.lesson_android_development.main;
+package com.example.user.lesson_android_development.main.shopBestSelling;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -7,8 +7,8 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.example.user.lesson_android_development.data.Shop;
-import com.example.user.lesson_android_development.databinding.ShopBestSellingItemBinding;
 import com.example.user.lesson_android_development.databinding.ShopItemBinding;
+import com.example.user.lesson_android_development.main.shop.ShopViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
