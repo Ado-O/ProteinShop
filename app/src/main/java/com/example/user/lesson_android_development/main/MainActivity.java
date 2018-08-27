@@ -1,9 +1,13 @@
 package com.example.user.lesson_android_development.main;
 
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.View;
+import android.widget.Toast;
 
 import com.example.user.lesson_android_development.R;
 import com.example.user.lesson_android_development.main.shop.ShopFragment;
@@ -35,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         //setting the toolbar title
         getSupportActionBar().setTitle("Shop");
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.clear_white);
         //setting up the back button on the toolbar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -54,7 +59,8 @@ public class MainActivity extends AppCompatActivity {
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
         return true;
     }
 

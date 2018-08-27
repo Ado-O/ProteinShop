@@ -2,27 +2,37 @@ package com.example.user.lesson_android_development.data;
 
 public class Shop {
 
-    private int image;
-    private String title;
+    private int mImage;
+    private String mTitle;
+    private String mPrice;
 
-    public Shop(int image, String title) {
-        this.image = image;
-        this.title = title;
+    public Shop(int image, String title, String price) {
+        this.mImage = image;
+        this.mTitle = title;
+        this.mPrice = price;
     }
 
     public int getImage() {
-        return image;
+        return mImage;
     }
 
     public void setImage(int image) {
-        this.image = image;
+        this.mImage = image;
     }
 
     public String getTitle() {
-        return title;
+        return mTitle;
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        this.mTitle = title;
+    }
+
+    public String getPrice() {
+        return mPrice;
+    }
+
+    public void setPrice(String price) {
+        mPrice = price;
     }
 }

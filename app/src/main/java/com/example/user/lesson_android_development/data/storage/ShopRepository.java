@@ -20,17 +20,17 @@ public class ShopRepository {
     public void getShop(GetShopCallback callback) {
 
         ArrayList<Shop> objects = new ArrayList<>();
-        objects.add(new Shop(R.drawable.image_1, "Stacks"));
-        objects.add(new Shop(R.drawable.image_1, "Stacks"));
-        objects.add(new Shop(R.drawable.image_1, "Stacks"));
-        objects.add(new Shop(R.drawable.image_1, "Stacks"));
-        objects.add(new Shop(R.drawable.image_1, "Stacks"));
-        objects.add(new Shop(R.drawable.image_1, "Stacks"));
-        objects.add(new Shop(R.drawable.image_1, "Stacks"));
+        objects.add(new Shop(R.drawable.image_1, "Stacks","$139.99"));
+        objects.add(new Shop(R.drawable.image_1, "Stacks","$139.99"));
+        objects.add(new Shop(R.drawable.image_1, "Stacks","$139.99"));
+        objects.add(new Shop(R.drawable.image_1, "Stacks","$139.99"));
+        objects.add(new Shop(R.drawable.image_1, "Stacks","$139.99"));
+        objects.add(new Shop(R.drawable.image_1, "Stacks","$139.99"));
+        objects.add(new Shop(R.drawable.image_1, "Stacks","$139.99"));
 
 
         if (objects != null) {
-            callback.onSuccess(objects);
+            callback.onSuccess(objects, objects);
         } else {
             callback.onError();
         }
@@ -39,7 +39,7 @@ public class ShopRepository {
 
 
     public interface GetShopCallback {
-        void onSuccess(List<Shop> shops);
+        void onSuccess(List<Shop> shops, List<Shop> bestSellingItem);
 
         void onError();
     }

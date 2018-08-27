@@ -18,6 +18,7 @@ public class MainViewModel extends AndroidViewModel {
     private final ShopRepository mShopRepository;
 
     public final ObservableList<Shop> mShops = new ObservableArrayList<>();
+    public final ObservableList<Shop> mBestSellingItems = new ObservableArrayList<>();
 
     public final ObservableBoolean mError = new ObservableBoolean(false);
 
@@ -30,6 +31,9 @@ public class MainViewModel extends AndroidViewModel {
         mShopRepository = shopRepository;
     }
 
+    /**
+     * shops
+     */
     public void startShops() {
         if (mShops.isEmpty()) {
             getShop();
@@ -40,7 +44,7 @@ public class MainViewModel extends AndroidViewModel {
 
         mShopRepository.getShop(new ShopRepository.GetShopCallback() {
             @Override
-            public void onSuccess(List<Shop> shops) {
+            public void onSuccess(List<Shop> shops, List<Shop> bestSellingItem) {
                 mShops.clear();
                 mShops.addAll(shops);
                 mError.set(mShops.isEmpty());
@@ -53,5 +57,34 @@ public class MainViewModel extends AndroidViewModel {
         });
     }
 
+    /**
+     * bestSellingItems
+     */
+    public void startBestSellingItems() {
+        if (mBestSellingItems.isEmpty()) {
+            getBestSellingItem();
+        }
     }
+
+    public void getBestSellingItem() {
+
+        mShopRepository.getShop(new ShopRepository.GetShopCallback() {
+            @Override
+            public void onSuccess(List<Shop> shops, List<Shop> bestSellingItem) {
+                mBestSellingItems.clear();
+                mBestSellingItems.addAll(shops);
+                mError.set(mBestSellingItems.isEmpty());
+            }
+
+            @Override
+            public void onError() {
+
+            }
+        });
+    }
+
+    public SingleLiveEvent<Shop> getOpenShopEvent() {
+        return mOpenShopEvent;
+    }
+}
 

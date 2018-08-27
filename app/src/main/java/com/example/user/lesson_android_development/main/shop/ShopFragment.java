@@ -35,6 +35,9 @@ public class ShopFragment extends Fragment {
         mMainViewModelShop = ViewModelFactory.obtainViewModel(getActivity(), MainViewModel.class);
         mMainViewModelShop.startShops();
 
+        mMainViewModelItems = ViewModelFactory.obtainViewModel(getActivity(), MainViewModel.class);
+        mMainViewModelItems.startBestSellingItems();
+
         setupRecycle();
 
         return mBinding.getRoot();
@@ -57,8 +60,8 @@ public class ShopFragment extends Fragment {
         mBinding.recyclerView.setLayoutManager(gridLayoutManager);
         mBinding.recyclerView.setAdapter(adapter);
 
-       mBinding.setShopItems(mMainViewModelShop);
-       mBinding.setBestSellingItems(mMainViewModelShop);
+       mBinding.setViewModel(mMainViewModelShop);
+       mBinding.setViewModel(mMainViewModelItems);
 
     }
 
