@@ -11,8 +11,9 @@ import java.util.List;
 
 public class ShopBinding {
 
-
-    //image
+    /*
+    image Glide
+     */
     @SuppressWarnings("unchecked")
     @BindingAdapter({"app:loadImage"})
     public static void setImage(ImageView view, int img){
@@ -22,6 +23,9 @@ public class ShopBinding {
                 .into(view);
     }
 
+    /*
+   passing data through Adapter
+     */
     @SuppressWarnings("unchecked")
     @BindingAdapter({"app:shopItems","app:shopBestSellingItems"})
     public static void setShopItems(RecyclerView recyclerView, List items, List bestSellingItems){
@@ -31,6 +35,9 @@ public class ShopBinding {
         }
     }
 
+    /*
+  passing data through Adapter
+    */
     @SuppressWarnings("unchecked")
     @BindingAdapter({"app:shopBestSellingItems"})
     public static void setBestSellingItems(RecyclerView recyclerView, List bestSellingItems){

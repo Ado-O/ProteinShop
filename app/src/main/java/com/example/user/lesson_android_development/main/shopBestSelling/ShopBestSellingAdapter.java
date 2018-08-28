@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.example.user.lesson_android_development.data.Shop;
 import com.example.user.lesson_android_development.databinding.ShopItemBinding;
 import com.example.user.lesson_android_development.main.shop.ShopViewHolder;
+import com.example.user.lesson_android_development.util.RecyclerViewClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +18,12 @@ public class ShopBestSellingAdapter extends RecyclerView.Adapter {
 
     private final List<Shop> mList=new ArrayList<>();
     private LayoutInflater mInflater;
+    private RecyclerViewClickListener mListener;
 
-    public ShopBestSellingAdapter(Context context) {
+
+    public ShopBestSellingAdapter(Context context, RecyclerViewClickListener listener) {
         mInflater = LayoutInflater.from(context);
+        mListener = listener;
     }
 
 
@@ -31,7 +35,7 @@ public class ShopBestSellingAdapter extends RecyclerView.Adapter {
                         mInflater,
                         parent,
                         false
-                )
+                ), mListener
         );
     }
 

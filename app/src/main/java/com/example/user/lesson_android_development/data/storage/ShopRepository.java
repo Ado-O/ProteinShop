@@ -19,15 +19,17 @@ public class ShopRepository {
 
     public void getShop(GetShopCallback callback) {
 
+        /*
+        data
+         */
         ArrayList<Shop> objects = new ArrayList<>();
-        objects.add(new Shop(R.drawable.image_1, "Stacks","$139.99"));
-        objects.add(new Shop(R.drawable.image_1, "Stacks","$139.99"));
-        objects.add(new Shop(R.drawable.image_1, "Stacks","$139.99"));
-        objects.add(new Shop(R.drawable.image_1, "Stacks","$139.99"));
-        objects.add(new Shop(R.drawable.image_1, "Stacks","$139.99"));
-        objects.add(new Shop(R.drawable.image_1, "Stacks","$139.99"));
-        objects.add(new Shop(R.drawable.image_1, "Stacks","$139.99"));
-
+        objects.add(new Shop(R.drawable.image_1, "Protein","$139.99"));
+        objects.add(new Shop(R.drawable.image_2, "Whey protein","$120.99"));
+        objects.add(new Shop(R.drawable.image_1, "Casein protein","$58.99"));
+        objects.add(new Shop(R.drawable.image_3, "Creatin","$22.99"));
+        objects.add(new Shop(R.drawable.image_2, "Amino protein","$99.99"));
+        objects.add(new Shop(R.drawable.image_3, "Gainer protein","$11.99"));
+        objects.add(new Shop(R.drawable.image_1, "Granola protein","$100.99"));
 
         if (objects != null) {
             callback.onSuccess(objects, objects);
@@ -36,7 +38,6 @@ public class ShopRepository {
         }
 
     }
-
 
     public interface GetShopCallback {
         void onSuccess(List<Shop> shops, List<Shop> bestSellingItem);

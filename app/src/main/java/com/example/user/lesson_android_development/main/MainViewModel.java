@@ -22,7 +22,7 @@ public class MainViewModel extends AndroidViewModel {
 
     public final ObservableBoolean mError = new ObservableBoolean(false);
 
-    private final SingleLiveEvent<Shop> mOpenShopEvent = new SingleLiveEvent<>();
+    public final SingleLiveEvent<Shop> mOpenShopEvent = new SingleLiveEvent<>();
 
 
     public MainViewModel(@NonNull Application application, ShopRepository shopRepository) {
@@ -40,7 +40,7 @@ public class MainViewModel extends AndroidViewModel {
         }
     }
 
-    public void getShop() {
+    private void getShop() {
 
         mShopRepository.getShop(new ShopRepository.GetShopCallback() {
             @Override
@@ -66,13 +66,13 @@ public class MainViewModel extends AndroidViewModel {
         }
     }
 
-    public void getBestSellingItem() {
+    private void getBestSellingItem() {
 
         mShopRepository.getShop(new ShopRepository.GetShopCallback() {
             @Override
             public void onSuccess(List<Shop> shops, List<Shop> bestSellingItem) {
                 mBestSellingItems.clear();
-                mBestSellingItems.addAll(shops);
+                mBestSellingItems.addAll(bestSellingItem);
                 mError.set(mBestSellingItems.isEmpty());
             }
 

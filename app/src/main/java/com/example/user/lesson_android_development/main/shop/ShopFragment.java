@@ -7,15 +7,17 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.user.lesson_android_development.data.Shop;
 import com.example.user.lesson_android_development.databinding.ShopFragBinding;
 import com.example.user.lesson_android_development.main.MainViewModel;
+import com.example.user.lesson_android_development.util.RecyclerViewClickListener;
 import com.example.user.lesson_android_development.util.ViewModelFactory;
 
-public class ShopFragment extends Fragment {
+public class ShopFragment extends Fragment implements RecyclerViewClickListener{
 
     private ShopFragBinding mBinding;
     private Context mContext;
@@ -32,9 +34,11 @@ public class ShopFragment extends Fragment {
 
         mContext = getActivity();
 
+        //shop model
         mMainViewModelShop = ViewModelFactory.obtainViewModel(getActivity(), MainViewModel.class);
         mMainViewModelShop.startShops();
 
+        //items model
         mMainViewModelItems = ViewModelFactory.obtainViewModel(getActivity(), MainViewModel.class);
         mMainViewModelItems.startBestSellingItems();
 
@@ -45,7 +49,7 @@ public class ShopFragment extends Fragment {
 
     private void setupRecycle(){
 
-        ShopAdapter adapter = new ShopAdapter(mContext);
+        ShopAdapter adapter = new ShopAdapter(mContext, ShopFragment.this);
         GridLayoutManager gridLayoutManager=new GridLayoutManager(mContext,2);
         gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
@@ -62,6 +66,13 @@ public class ShopFragment extends Fragment {
 
        mBinding.setViewModel(mMainViewModelShop);
        mBinding.setViewModel(mMainViewModelItems);
+
+    }
+
+    @Override
+    public void recyclerViewListClicked(View v, Shop shop) {
+        mMainViewModelShop.getOpenShopEvent().setValue(shop);
+        mMainViewModelItems.getOpenShopEvent().setValue(shop);
 
     }
 

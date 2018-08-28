@@ -9,6 +9,7 @@ import com.example.user.lesson_android_development.data.Shop;
 import com.example.user.lesson_android_development.databinding.ShopBestSellingItemBinding;
 import com.example.user.lesson_android_development.databinding.ShopItemBinding;
 import com.example.user.lesson_android_development.main.shopBestSelling.ShopBestSellingViewHolder;
+import com.example.user.lesson_android_development.util.RecyclerViewClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,13 +21,15 @@ public class ShopAdapter extends RecyclerView.Adapter {
     private final int ITEM = 2;
 
     private LayoutInflater mInflater;
+    private RecyclerViewClickListener mListener;
 
     private ArrayList<Shop> mBestSellingItems=new ArrayList<>();
     private ArrayList<Shop> mItems=new ArrayList<>();
 
 
-    public ShopAdapter(Context context) {
+    public ShopAdapter(Context context, RecyclerViewClickListener listener) {
         mInflater = LayoutInflater.from(context);
+        mListener = listener;
     }
 
     //this method returns the number according to the Vertical/Horizontal object
@@ -48,7 +51,7 @@ public class ShopAdapter extends RecyclerView.Adapter {
                     mInflater,
                     parent,
                     false
-                    )
+                    ), mListener
             );
         } else if (viewType == ITEM) {
             return new ShopViewHolder(
@@ -56,7 +59,7 @@ public class ShopAdapter extends RecyclerView.Adapter {
                     mInflater,
                     parent,
                     false
-                    )
+                    ), mListener
             );
         } else {
             throw new RuntimeException("The type has to be ONE or TWO");

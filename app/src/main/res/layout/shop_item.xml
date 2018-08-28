@@ -5,6 +5,12 @@
 
     <data>
 
+        <import type="android.view.View.OnClickListener"/>
+
+        <variable
+            name="listener"
+            type="com.example.user.lesson_android_development.util.RecyclerViewClickListener"/>
+
         <variable
             name="shop"
             type="com.example.user.lesson_android_development.data.Shop" />
@@ -13,6 +19,7 @@
     <android.support.design.card.MaterialCardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="@{(view)-> listener.recyclerViewListClicked(view, shop)}"
         android:layout_margin="8dp"
         app:cardCornerRadius="4dp"
         app:cardElevation="4dp">
@@ -59,10 +66,11 @@
                 android:id="@+id/fab_main"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:backgroundTint="#ffffff"
+                app:backgroundTint="@color/colorWhite"
                 app:srcCompat="@drawable/shopping_cart"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                android:onClick="onClickFAB"
                 tools:ignore="VectorDrawableCompat"
                 app:fabSize="mini"/>
 
