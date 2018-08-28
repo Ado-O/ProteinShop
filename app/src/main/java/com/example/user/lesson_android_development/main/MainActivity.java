@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.user.lesson_android_development.R;
-import com.example.user.lesson_android_development.data.Shop;
+import com.example.user.lesson_android_development.data.Supplement;
 import com.example.user.lesson_android_development.main.shop.ShopFragment;
 import com.example.user.lesson_android_development.util.ActivityUtils;
 import com.example.user.lesson_android_development.util.ViewModelFactory;
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         //toolbar setup
         setSupportActionBar(mToolbar);
         //setting the toolbar title
-        getSupportActionBar().setTitle("Shop");
+        getSupportActionBar().setTitle("Supplement");
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.clear_white);
         //setting up the back button on the toolbar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -104,10 +104,10 @@ public class MainActivity extends AppCompatActivity {
      */
     private void setupEvents() {
 
-        mMainViewModel.getOpenShopEvent().observe(MainActivity.this, new Observer<Shop>() {
+        mMainViewModel.getOpenShopEvent().observe(MainActivity.this, new Observer<Supplement>() {
             @Override
-            public void onChanged(@Nullable Shop shop) {
-                Toast.makeText(MainActivity.this, shop.getTitle(), Toast.LENGTH_SHORT).show();
+            public void onChanged(@Nullable Supplement supplement) {
+                Toast.makeText(MainActivity.this, supplement.getTitle(), Toast.LENGTH_SHORT).show();
             }
         });
 

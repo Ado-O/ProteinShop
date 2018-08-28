@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.example.user.lesson_android_development.data.Shop;
+import com.example.user.lesson_android_development.data.Supplement;
 import com.example.user.lesson_android_development.databinding.ShopBestSellingItemBinding;
 import com.example.user.lesson_android_development.databinding.ShopItemBinding;
 import com.example.user.lesson_android_development.main.shopBestSelling.ShopBestSellingViewHolder;
@@ -23,8 +23,8 @@ public class ShopAdapter extends RecyclerView.Adapter {
     private LayoutInflater mInflater;
     private RecyclerViewClickListener mListener;
 
-    private ArrayList<Shop> mBestSellingItems=new ArrayList<>();
-    private ArrayList<Shop> mItems=new ArrayList<>();
+    private ArrayList<Supplement> mBestSellingItems=new ArrayList<>();
+    private ArrayList<Supplement> mItems=new ArrayList<>();
 
 
     public ShopAdapter(Context context, RecyclerViewClickListener listener) {
@@ -83,7 +83,7 @@ public class ShopAdapter extends RecyclerView.Adapter {
         return mItems.size() + 1;
     }
 
-    public void setItems(List<Shop> items, List<Shop> bestSellingItems){
+    public void setItems(List<Supplement> items, List<Supplement> bestSellingItems){
         mItems.clear();
         mItems.addAll(items);
 

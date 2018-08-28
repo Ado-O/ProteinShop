@@ -23,7 +23,7 @@
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:shopBestSellingItems="@{viewModel.mBestSellingItems}"
-            app:shopItems="@{viewModel.mShops}" />
+            app:shopItems="@{viewModel.mSupplements}" />
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"

@@ -11,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.user.lesson_android_development.data.Shop;
+import com.example.user.lesson_android_development.data.Supplement;
 import com.example.user.lesson_android_development.databinding.ShopFragBinding;
 import com.example.user.lesson_android_development.main.MainViewModel;
 import com.example.user.lesson_android_development.util.RecyclerViewClickListener;
@@ -70,9 +70,9 @@ public class ShopFragment extends Fragment implements RecyclerViewClickListener{
     }
 
     @Override
-    public void recyclerViewListClicked(View v, Shop shop) {
-        mMainViewModelShop.getOpenShopEvent().setValue(shop);
-        mMainViewModelItems.getOpenShopEvent().setValue(shop);
+    public void recyclerViewListClicked(View v, Supplement supplement) {
+        mMainViewModelShop.getOpenShopEvent().setValue(supplement);
+        mMainViewModelItems.getOpenShopEvent().setValue(supplement);
 
     }
 

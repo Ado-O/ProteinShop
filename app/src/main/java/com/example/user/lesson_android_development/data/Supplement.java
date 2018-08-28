@@ -1,12 +1,12 @@
 package com.example.user.lesson_android_development.data;
 
-public class Shop {
+public class Supplement {
 
     private int mImage;
     private String mTitle;
     private String mPrice;
 
-    public Shop(int image, String title, String price) {
+    public Supplement(int image, String title, String price) {
         this.mImage = image;
         this.mTitle = title;
         this.mPrice = price;

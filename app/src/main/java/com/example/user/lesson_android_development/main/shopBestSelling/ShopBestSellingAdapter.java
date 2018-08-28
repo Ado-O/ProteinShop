@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.example.user.lesson_android_development.data.Shop;
+import com.example.user.lesson_android_development.data.Supplement;
 import com.example.user.lesson_android_development.databinding.ShopItemBinding;
 import com.example.user.lesson_android_development.main.shop.ShopViewHolder;
 import com.example.user.lesson_android_development.util.RecyclerViewClickListener;
@@ -16,7 +16,7 @@ import java.util.List;
 
 public class ShopBestSellingAdapter extends RecyclerView.Adapter {
 
-    private final List<Shop> mList=new ArrayList<>();
+    private final List<Supplement> mList=new ArrayList<>();
     private LayoutInflater mInflater;
     private RecyclerViewClickListener mListener;
 

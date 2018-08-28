@@ -7,7 +7,7 @@ import android.databinding.ObservableBoolean;
 import android.databinding.ObservableList;
 import android.support.annotation.NonNull;
 
-import com.example.user.lesson_android_development.data.Shop;
+import com.example.user.lesson_android_development.data.Supplement;
 import com.example.user.lesson_android_development.data.storage.ShopRepository;
 import com.example.user.lesson_android_development.util.SingleLiveEvent;
 
@@ -17,12 +17,12 @@ public class MainViewModel extends AndroidViewModel {
 
     private final ShopRepository mShopRepository;
 
-    public final ObservableList<Shop> mShops = new ObservableArrayList<>();
-    public final ObservableList<Shop> mBestSellingItems = new ObservableArrayList<>();
+    public final ObservableList<Supplement> mSupplements = new ObservableArrayList<>();
+    public final ObservableList<Supplement> mBestSellingItems = new ObservableArrayList<>();
 
     public final ObservableBoolean mError = new ObservableBoolean(false);
 
-    public final SingleLiveEvent<Shop> mOpenShopEvent = new SingleLiveEvent<>();
+    public final SingleLiveEvent<Supplement> mOpenShopEvent = new SingleLiveEvent<>();
 
 
     public MainViewModel(@NonNull Application application, ShopRepository shopRepository) {
@@ -35,7 +35,7 @@ public class MainViewModel extends AndroidViewModel {
      * shops
      */
     public void startShops() {
-        if (mShops.isEmpty()) {
+        if (mSupplements.isEmpty()) {
             getShop();
         }
     }
@@ -44,10 +44,10 @@ public class MainViewModel extends AndroidViewModel {
 
         mShopRepository.getShop(new ShopRepository.GetShopCallback() {
             @Override
-            public void onSuccess(List<Shop> shops, List<Shop> bestSellingItem) {
-                mShops.clear();
-                mShops.addAll(shops);
-                mError.set(mShops.isEmpty());
+            public void onSuccess(List<Supplement> supplements, List<Supplement> bestSellingItem) {
+                mSupplements.clear();
+                mSupplements.addAll(supplements);
+                mError.set(mSupplements.isEmpty());
             }
 
             @Override
@@ -70,7 +70,7 @@ public class MainViewModel extends AndroidViewModel {
 
         mShopRepository.getShop(new ShopRepository.GetShopCallback() {
             @Override
-            public void onSuccess(List<Shop> shops, List<Shop> bestSellingItem) {
+            public void onSuccess(List<Supplement> supplements, List<Supplement> bestSellingItem) {
                 mBestSellingItems.clear();
                 mBestSellingItems.addAll(bestSellingItem);
                 mError.set(mBestSellingItems.isEmpty());
@@ -83,7 +83,7 @@ public class MainViewModel extends AndroidViewModel {
         });
     }
 
-    public SingleLiveEvent<Shop> getOpenShopEvent() {
+    public SingleLiveEvent<Supplement> getOpenShopEvent() {
         return mOpenShopEvent;
     }
 }

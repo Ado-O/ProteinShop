@@ -1,7 +1,7 @@
 package com.example.user.lesson_android_development.data.storage;
 
 import com.example.user.lesson_android_development.R;
-import com.example.user.lesson_android_development.data.Shop;
+import com.example.user.lesson_android_development.data.Supplement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,14 +22,14 @@ public class ShopRepository {
         /*
         data
          */
-        ArrayList<Shop> objects = new ArrayList<>();
-        objects.add(new Shop(R.drawable.image_1, "Protein","$139.99"));
-        objects.add(new Shop(R.drawable.image_2, "Whey protein","$120.99"));
-        objects.add(new Shop(R.drawable.image_1, "Casein protein","$58.99"));
-        objects.add(new Shop(R.drawable.image_3, "Creatin","$22.99"));
-        objects.add(new Shop(R.drawable.image_2, "Amino protein","$99.99"));
-        objects.add(new Shop(R.drawable.image_3, "Gainer protein","$11.99"));
-        objects.add(new Shop(R.drawable.image_1, "Granola protein","$100.99"));
+        ArrayList<Supplement> objects = new ArrayList<>();
+        objects.add(new Supplement(R.drawable.image_1, "Protein","$139.99"));
+        objects.add(new Supplement(R.drawable.image_2, "Whey protein","$120.99"));
+        objects.add(new Supplement(R.drawable.image_1, "Casein protein","$58.99"));
+        objects.add(new Supplement(R.drawable.image_3, "Creatin","$22.99"));
+        objects.add(new Supplement(R.drawable.image_2, "Amino protein","$99.99"));
+        objects.add(new Supplement(R.drawable.image_3, "Gainer protein","$11.99"));
+        objects.add(new Supplement(R.drawable.image_1, "Granola protein","$100.99"));
 
         if (objects != null) {
             callback.onSuccess(objects, objects);
@@ -40,7 +40,7 @@ public class ShopRepository {
     }
 
     public interface GetShopCallback {
-        void onSuccess(List<Shop> shops, List<Shop> bestSellingItem);
+        void onSuccess(List<Supplement> supplements, List<Supplement> bestSellingItem);
 
         void onError();
     }
