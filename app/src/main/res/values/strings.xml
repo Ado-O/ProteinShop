@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">Lesson-Android-Development</string>
     <string name="action_settings">Settings</string>
+
+    <!--Checkout toast text-->
+    <string name="text_checkout_add">Your item has benn added\nto the cart</string>
+    <string name="text_checkout">CHECKOUT</string>
+
+    <!--add items layout-->
+    <string name="items_checkout_btn">CHECKOUT</string>
+    <string name="items_text_card">My cart</string>
+    <string name="items_text">1 Items</string>
+
 </resources>

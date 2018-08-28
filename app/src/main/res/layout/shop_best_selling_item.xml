@@ -22,6 +22,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginBottom="5dp"
         android:textStyle="bold"
+        android:textSize="@dimen/text"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:text="Best selling"/>
@@ -41,8 +42,9 @@
         android:layout_marginLeft="10dp"
         android:layout_marginBottom="5dp"
         android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:textSize="@dimen/text"
         android:text="Featured Stacks"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rv_bestSelling"/>
 
 </android.support.constraint.ConstraintLayout>

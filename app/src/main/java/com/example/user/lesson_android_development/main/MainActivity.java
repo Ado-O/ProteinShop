@@ -1,12 +1,18 @@
 package com.example.user.lesson_android_development.main;
 
+import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.user.lesson_android_development.R;
@@ -28,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
         //Setup
         setupToolbar();
         setupFragment();
-
     }
 
     /**
@@ -62,6 +67,23 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_menu, menu);
         return true;
+    }
+
+    /**
+     * button and toast message
+     */
+    public void onClickBtn(View view){
+
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.custom_toast,
+                (ViewGroup) findViewById(R.id.custom_toast_container));
+
+
+        Toast toast = new Toast(getApplicationContext());
+        toast.setGravity(Gravity.FILL_HORIZONTAL, 0, 300);
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setView(layout);
+        toast.show();
     }
 
     /**
