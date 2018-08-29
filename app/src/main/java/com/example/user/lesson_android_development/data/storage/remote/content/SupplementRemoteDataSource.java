@@ -46,7 +46,6 @@ public class SupplementRemoteDataSource {
                         }.getType()
                 );
 
-        Log.e(TAG, "INSIDE");
         callback.onSuccess(RemoteToLocal.productsConvertor(
                 baseResponse.getProducts()
         ));

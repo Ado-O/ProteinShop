@@ -8,7 +8,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ServiceGenerator {
-    private static final String sBaseUrl = "he whrite URL";
+    private static final String sBaseUrl = "in this place write URL";
 
     private static final boolean mLoggingEnabled = true;
 

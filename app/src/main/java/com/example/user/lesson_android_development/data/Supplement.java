@@ -1,21 +1,38 @@
 package com.example.user.lesson_android_development.data;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
+
 import java.util.List;
 
+@Entity(tableName = "supplement_table")
 public class Supplement {
 
+    @ColumnInfo(name = "_id")
+    @PrimaryKey(autoGenerate = true)
     private long mId;
+
+    @ColumnInfo(name = "title")
     private String mTitle;
+
+    @ColumnInfo(name = "description")
     private String mDes;
+
+    @Ignore
     private List<String> mImage;
+
+    @ColumnInfo(name = "price")
     private String mPrice;
+
+    @ColumnInfo(name = "discounte")
     private String mDiscounte;
 
-    public Supplement(long id, String title, String des, List<String> image, String price, String discounte) {
+    public Supplement(long id, String title, String des, String price, String discounte) {
         mId = id;
         mTitle = title;
         mDes = des;
-        mImage = image;
         mPrice = price;
         mDiscounte = discounte;
     }

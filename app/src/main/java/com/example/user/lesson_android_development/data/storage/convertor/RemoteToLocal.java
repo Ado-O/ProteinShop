@@ -18,7 +18,6 @@ public class RemoteToLocal {
                             p.getId(),
                             p.getTitle(),
                             p.getDes(),
-                            p.getPictures(),
                             p.getPrice(),
                             p.getDiscounte())
             );

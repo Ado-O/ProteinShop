@@ -1,9 +1,7 @@
 package com.example.user.lesson_android_development.data.storage;
 
-import com.example.user.lesson_android_development.R;
 import com.example.user.lesson_android_development.data.Supplement;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ShopRepository {
@@ -21,7 +19,6 @@ public class ShopRepository {
 
         /*
         data
-
         ArrayList<Supplement> objects = new ArrayList<>();
         objects.add(new Supplement(R.drawable.image_1, "Protein","$139.99"));
         objects.add(new Supplement(R.drawable.image_2, "Whey protein","$120.99"));
@@ -30,7 +27,6 @@ public class ShopRepository {
         objects.add(new Supplement(R.drawable.image_2, "Amino protein","$99.99"));
         objects.add(new Supplement(R.drawable.image_3, "Gainer protein","$11.99"));
         objects.add(new Supplement(R.drawable.image_1, "Granola protein","$100.99"));
-
         if (objects != null) {
             callback.onSuccess(objects, objects);
         } else {
@@ -45,3 +41,4 @@ public class ShopRepository {
         void onError();
     }
 }
+

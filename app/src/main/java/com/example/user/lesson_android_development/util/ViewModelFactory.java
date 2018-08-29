@@ -10,8 +10,6 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.FragmentActivity;
 
 import com.example.user.lesson_android_development.Injection;
-import com.example.user.lesson_android_development.data.storage.ShopRepository;
-import com.example.user.lesson_android_development.main.MainViewModel;
 
 public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
     @SuppressLint("StaticFieldLeak")
@@ -19,7 +17,6 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
 
     private final Application mApplication;
 
-    private final ShopRepository mShopRepository;
 
     public static ViewModelFactory getInstance(Application application) {
 
@@ -27,8 +24,7 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
             synchronized (ViewModelFactory.class) {
                 if (INSTANCE == null) {
                     INSTANCE = new ViewModelFactory(
-                            application,
-                            Injection.getShopRepository()
+                            application
                     );
                 }
             }
@@ -41,17 +37,15 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
         INSTANCE = null;
     }
 
-    private ViewModelFactory(Application application, ShopRepository shopRepository) {
+    private ViewModelFactory(Application application) {
         mApplication = application;
-
-        mShopRepository = shopRepository;
-    }
+        }
 
     @Override
     public <T extends ViewModel> T create(Class<T> modelClass) {
-        if (modelClass.isAssignableFrom(MainViewModel.class)) {
-            return (T) new MainViewModel(mApplication, mShopRepository);
-        }
+//        if (modelClass.isAssignableFrom(MainViewModel.class)) {
+//            return (T) new MainViewModel(mApplication, mShopRepository);
+//        }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }
 

@@ -1,11 +1,10 @@
 package com.example.user.lesson_android_development.data.storage;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.example.user.lesson_android_development.data.Supplement;
+import com.example.user.lesson_android_development.data.storage.local.supplement.SupplementLocalDataSource;
 import com.example.user.lesson_android_development.data.storage.remote.content.SupplementRemoteDataSource;
-import com.example.user.lesson_android_development.data.storage.remote.response.BaseResponse;
 
 import java.util.List;
 
@@ -16,14 +15,16 @@ public class SupplementsRepository {
     private static SupplementsRepository sContentRepository = null;
 
     private final SupplementRemoteDataSource mRemoteDataSource;
+    private final SupplementLocalDataSource mLocalDataSource;
 
-    public SupplementsRepository(Context context) {
-        mRemoteDataSource = new SupplementRemoteDataSource(context);
+    public SupplementsRepository(Context context, SupplementRemoteDataSource remoteDataSource, SupplementLocalDataSource localDataSource) {
+        mRemoteDataSource = remoteDataSource;
+        mLocalDataSource = localDataSource;
     }
 
-    public static SupplementsRepository getInstance(Context context) {
+    public static SupplementsRepository getInstance(Context context, SupplementRemoteDataSource remoteDataSource, SupplementLocalDataSource localDataSource) {
         if (sContentRepository == null) {
-            sContentRepository = new SupplementsRepository(context);
+            sContentRepository = new SupplementsRepository(context, remoteDataSource, localDataSource);
         }
         return sContentRepository;
     }
@@ -33,7 +34,7 @@ public class SupplementsRepository {
         mRemoteDataSource.getSupplements(new SupplementRemoteDataSource.GetSupplementsCallback() {
             @Override
             public void onSuccess(List<Supplement> supplements) {
-                callback.onSuccess(supplements);
+                mLocalDataSource.getSuplements(supplements,callback);
             }
 
             @Override
