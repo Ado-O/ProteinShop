@@ -18,9 +18,9 @@ public class ShopBinding {
     @BindingAdapter({"app:loadImage"})
     public static void setImage(ImageView view, int img){
         //img
-        Glide.with(view.getContext())
-                .load(img)
-                .into(view);
+//        Glide.with(view.getContext())
+//                .load(img)
+//                .into(view);
     }
 
     /*

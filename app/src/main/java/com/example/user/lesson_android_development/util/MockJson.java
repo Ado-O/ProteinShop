@@ -1,4 +1,4 @@
-package com.example.user.lesson_android_development.data;
+package com.example.user.lesson_android_development.util;
 
 import android.content.Context;
 

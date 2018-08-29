@@ -21,7 +21,7 @@ public class ShopRepository {
 
         /*
         data
-         */
+
         ArrayList<Supplement> objects = new ArrayList<>();
         objects.add(new Supplement(R.drawable.image_1, "Protein","$139.99"));
         objects.add(new Supplement(R.drawable.image_2, "Whey protein","$120.99"));
@@ -36,7 +36,7 @@ public class ShopRepository {
         } else {
             callback.onError();
         }
-
+ */
     }
 
     public interface GetShopCallback {

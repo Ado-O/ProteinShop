@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -15,15 +16,20 @@ import android.widget.Toast;
 
 import com.example.user.lesson_android_development.R;
 import com.example.user.lesson_android_development.data.Supplement;
+import com.example.user.lesson_android_development.data.storage.SupplementsRepository;
 import com.example.user.lesson_android_development.main.shop.ShopFragment;
 import com.example.user.lesson_android_development.util.ActivityUtils;
 import com.example.user.lesson_android_development.util.ViewModelFactory;
 
+import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = MainActivity.class.getSimpleName();
     private Toolbar mToolbar;
     private MainViewModel mMainViewModel;
+    private SupplementsRepository mRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +38,19 @@ public class MainActivity extends AppCompatActivity {
 
         mToolbar = findViewById(R.id.tb_main);
         mMainViewModel = ViewModelFactory.obtainViewModel(this, MainViewModel.class);
+        mRepository = new SupplementsRepository(this);
+
+        mRepository.getSupplementContent(new SupplementsRepository.GetSupplementCallback() {
+            @Override
+            public void onSuccess(List<Supplement> supplements) {
+                Log.e(TAG, String.valueOf(supplements.get(0).getTitle()));
+            }
+
+            @Override
+            public void onError() {
+
+            }
+        });
 
         //Setup
         setupToolbar();
@@ -116,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * FloatActionButton
      */
-    public void onClickFAB(View view){
+    public void onClickFAB(View view) {
         Toast.makeText(MainActivity.this, "Float button", Toast.LENGTH_SHORT).show();
 
     }

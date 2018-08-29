@@ -1,24 +1,37 @@
-package com.example.user.lesson_android_development.data;
+package com.example.user.lesson_android_development.data.storage.remote.response;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
 import java.util.List;
 
-public class Supplement {
+public class ProductsResponse implements Serializable{
 
+
+    @SerializedName("id")
+    @Expose
     private long mId;
-    private String mTitle;
-    private String mDes;
-    private List<String> mImage;
-    private String mPrice;
-    private String mDiscounte;
 
-    public Supplement(long id, String title, String des, List<String> image, String price, String discounte) {
-        mId = id;
-        mTitle = title;
-        mDes = des;
-        mImage = image;
-        mPrice = price;
-        mDiscounte = discounte;
-    }
+    @SerializedName("name")
+    @Expose
+    private String mTitle;
+
+    @SerializedName("description")
+    @Expose
+    private String mDes;
+
+    @SerializedName("pictures")
+    @Expose
+    private List<String> mPictures = null;
+
+    @SerializedName("price")
+    @Expose
+    private String mPrice;
+
+    @SerializedName("discounted")
+    @Expose
+    private String mDiscounte;
 
     public long getId() {
         return mId;
@@ -44,12 +57,12 @@ public class Supplement {
         mDes = des;
     }
 
-    public List<String> getImage() {
-        return mImage;
+    public List<String> getPictures() {
+        return mPictures;
     }
 
-    public void setImage(List<String> image) {
-        mImage = image;
+    public void setPictures(List<String> pictures) {
+        mPictures = pictures;
     }
 
     public String getPrice() {
