@@ -20,8 +20,8 @@ public class Supplement {
     @ColumnInfo(name = "description")
     private String mDes;
 
-    @Ignore
-    private List<String> mImage;
+    @ColumnInfo(name = "pictures")
+    private String mPictures;
 
     @ColumnInfo(name = "price")
     private String mPrice;
@@ -29,12 +29,13 @@ public class Supplement {
     @ColumnInfo(name = "discounte")
     private String mDiscounte;
 
-    public Supplement(long id, String title, String des, String price, String discounte) {
+    public Supplement(long id, String title, String des, String price, String discounte, String pictures) {
         mId = id;
         mTitle = title;
         mDes = des;
         mPrice = price;
         mDiscounte = discounte;
+        mPictures = pictures;
     }
 
     public long getId() {
@@ -61,14 +62,6 @@ public class Supplement {
         mDes = des;
     }
 
-    public List<String> getImage() {
-        return mImage;
-    }
-
-    public void setImage(List<String> image) {
-        mImage = image;
-    }
-
     public String getPrice() {
         return mPrice;
     }
@@ -83,5 +76,13 @@ public class Supplement {
 
     public void setDiscounte(String discounte) {
         mDiscounte = discounte;
+    }
+
+    public String getPictures() {
+        return mPictures;
+    }
+
+    public void setPictures(String pictures) {
+        mPictures = pictures;
     }
 }

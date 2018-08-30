@@ -8,18 +8,23 @@ import java.util.List;
 
 public class RemoteToLocal {
 
-    public static List<Supplement> productsConvertor(List<ProductsResponse> productsResponses){
+    public static List<Supplement> productsConvertor(List<ProductsResponse> productsResponses) {
 
         List<Supplement> supplements = new ArrayList<>();
 
-        for(ProductsResponse p : productsResponses){
+        for (ProductsResponse p : productsResponses) {
+
+
             supplements.add(
                     new Supplement(
                             p.getId(),
                             p.getTitle(),
                             p.getDes(),
                             p.getPrice(),
-                            p.getDiscounte())
+                            p.getDiscounte(),
+                            p.getPictures().get(0)
+                    )
+
             );
         }
         return supplements;
