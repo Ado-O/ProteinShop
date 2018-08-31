@@ -26,7 +26,8 @@ public class Injection {
         return ProductsLocalDataSource.getInstance(
                 provideAppDatabase(context.getApplicationContext()).getProductsDao(),
                 provideAppExecutors(),
-                provideAppDatabase(context.getApplicationContext()).getProductImageDao()
+                provideAppDatabase(context.getApplicationContext()).getProductImageDao(),
+                provideAppDatabase(context.getApplicationContext()).getProductDescriptionDao()
         );
     }
 

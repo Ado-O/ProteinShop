@@ -32,6 +32,9 @@ public class Products {
     @Ignore
     private List<ProductImage> mProductImages = null;
 
+    @Ignore
+    private List<ProductDescription> mProductDescriptions = null;
+
     public Products(long id, String title, String des, String price, String discounte, String pictures) {
         mId = id;
         mTitle = title;
@@ -95,5 +98,13 @@ public class Products {
 
     public void setProductImages(List<ProductImage> productImages) {
         mProductImages = productImages;
+    }
+
+    public List<ProductDescription> getProductDescriptions() {
+        return mProductDescriptions;
+    }
+
+    public void setProductDescriptions(List<ProductDescription> productDescriptions) {
+        mProductDescriptions = productDescriptions;
     }
 }

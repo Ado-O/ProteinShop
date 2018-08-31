@@ -2,6 +2,7 @@ package com.example.user.lesson_android_development.data.storage.convertor;
 
 import android.util.Log;
 
+import com.example.user.lesson_android_development.data.ProductDescription;
 import com.example.user.lesson_android_development.data.ProductImage;
 import com.example.user.lesson_android_development.data.Products;
 import com.example.user.lesson_android_development.data.storage.remote.response.ProductsResponse;
@@ -48,9 +49,9 @@ public class RemoteToLocal {
         if (productsResponse.getSuplements().size() > 1) {
             for (long sId : productsResponse.getSuplements()) {
                 for (SupplementsResponse s : supplementsResponses) {
-                    if (sId ==s.getId()) {
-                        for(String imageUrl:s.getPictures()){
-                            productImages.add(new ProductImage(productsResponse.getId(),imageUrl));
+                    if (sId == s.getId()) {
+                        for (String imageUrl : s.getPictures()) {
+                            productImages.add(new ProductImage(productsResponse.getId(), imageUrl));
                         }
                         break;
                     }
@@ -58,8 +59,26 @@ public class RemoteToLocal {
             }
 
         }
-
-
         return productImages;
+    }
+
+    public static List<ProductDescription> productDescriptionConverter(
+            ProductsResponse productsResponse,
+            List<SupplementsResponse> supplementsResponses) {
+        List<ProductDescription> productDescriptions = new ArrayList<>();
+
+        if (productsResponse.getSuplements().size() > 1) {
+            for (long sId : productsResponse.getSuplements()) { //get ever id from productResponse
+                for (SupplementsResponse s : supplementsResponses) { //get everting from supplementResponse
+                    if (sId == s.getId()) { //compare id which we get from productsResponse.getSuplements() to supplementResponse
+                        productDescriptions.add(new ProductDescription(productsResponse.getId(), s.getTitle(), s.getDes()));
+                        break;
+                    }
+                }
+            }
+        }
+
+
+        return productDescriptions;
     }
 }

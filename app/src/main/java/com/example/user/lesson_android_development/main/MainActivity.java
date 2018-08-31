@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         mRepository.getProductsContent(new ProductsRepository.GetProductsCallback() {
             @Override
             public void onSuccess(List<Products> products) {
-                     Log.e(TAG, String.valueOf(products.get(2).getProductImages().get(1).getPictures()));
+                     Log.e(TAG, String.valueOf(products.get(0).getProductDescriptions().size()));
             }
 
             @Override

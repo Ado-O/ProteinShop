@@ -43,8 +43,7 @@ public class ProductsRepository {
         mRemoteDataSource.getProducts(new ProductsRemoteDataSource.GetProductsCallback() {
             @Override
             public void onSuccess(BaseResponse baseResponse) {
-                mLocalDataSource.getProducts(baseResponse, RemoteToLocal.productsConvertor(
-                        baseResponse.getProducts())
+                mLocalDataSource.getProducts(baseResponse
                         , callback);
 
 

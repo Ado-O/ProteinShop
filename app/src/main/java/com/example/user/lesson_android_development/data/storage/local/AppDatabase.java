@@ -7,16 +7,18 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.user.lesson_android_development.data.ProductDescription;
 import com.example.user.lesson_android_development.data.ProductImage;
 import com.example.user.lesson_android_development.data.Products;
 import com.example.user.lesson_android_development.data.storage.local.productImage.ProductImageDao;
+import com.example.user.lesson_android_development.data.storage.local.productdescription.ProductDescriptionDao;
 import com.example.user.lesson_android_development.data.storage.local.supplement.ProductsDao;
 
 import java.io.File;
 
 @Database(entities = {
-        Products.class, ProductImage.class
-}, version = 4, exportSchema = false)
+        Products.class, ProductImage.class, ProductDescription.class
+}, version = 5, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase INSTANCE;
@@ -24,6 +26,8 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract ProductsDao getProductsDao();
 
     public abstract ProductImageDao getProductImageDao();
+
+    public abstract ProductDescriptionDao getProductDescriptionDao();
 
     public static final Object sLock = new Object();
 
@@ -37,6 +41,9 @@ public abstract class AppDatabase extends RoomDatabase {
         }
     }
 
+    /**
+     * cod for db editor
+     */
     private static void pragmaCheckpoint(Context context) {
         String dbpath = (context).getDatabasePath("spartan.db").getPath();
         if (ifDBExists(dbpath)) {
