@@ -5,8 +5,8 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
-@Entity(tableName = "productdescription_table")
-public class ProductDescription {
+@Entity(tableName = "product_tag_table")
+public class ProductTag {
 
     @ColumnInfo(name = "_id")
     @PrimaryKey(autoGenerate = true)
@@ -15,25 +15,20 @@ public class ProductDescription {
     @ColumnInfo(name = "product_id")
     private long mProductId;
 
-    @ColumnInfo(name = "name")
-    private String mName;
+    @ColumnInfo(name = "tag_id")
+    private long mTagId;
 
-    @ColumnInfo(name = "description")
-    private String mDescription;
-
-    public ProductDescription(Integer id, long productId, String name, String description) {
+    public ProductTag(Integer id, long productId, long tagId) {
         mId = id;
         mProductId = productId;
-        mName = name;
-        mDescription = description;
+        mTagId = tagId;
     }
 
     @Ignore
-    public ProductDescription(long productId, String name, String description) {
+    public ProductTag(long productId, long tagId) {
         mId = null;
         mProductId = productId;
-        mName = name;
-        mDescription = description;
+        mTagId = tagId;
     }
 
     public Integer getId() {
@@ -52,19 +47,11 @@ public class ProductDescription {
         mProductId = productId;
     }
 
-    public String getName() {
-        return mName;
+    public long getTagId() {
+        return mTagId;
     }
 
-    public void setName(String name) {
-        mName = name;
-    }
-
-    public String getDescription() {
-        return mDescription;
-    }
-
-    public void setDescription(String description) {
-        mDescription = description;
+    public void setTagId(long tagId) {
+        mTagId = tagId;
     }
 }

@@ -1,11 +1,7 @@
 package com.example.user.lesson_android_development.data.storage;
 
-import android.content.Context;
-
-import com.example.user.lesson_android_development.data.ProductImage;
-import com.example.user.lesson_android_development.data.Products;
-import com.example.user.lesson_android_development.data.storage.convertor.RemoteToLocal;
-import com.example.user.lesson_android_development.data.storage.local.supplement.ProductsLocalDataSource;
+import com.example.user.lesson_android_development.data.Product;
+import com.example.user.lesson_android_development.data.storage.local.product.ProductLocalDataSource;
 import com.example.user.lesson_android_development.data.storage.remote.content.ProductsRemoteDataSource;
 import com.example.user.lesson_android_development.data.storage.remote.response.BaseResponse;
 
@@ -18,22 +14,20 @@ public class ProductsRepository {
     private static ProductsRepository sContentRepository = null;
 
     private final ProductsRemoteDataSource mRemoteDataSource;
-    private final ProductsLocalDataSource mLocalDataSource;
+    private final ProductLocalDataSource mLocalDataSource;
 
-    public ProductsRepository(Context context,
-                              ProductsRemoteDataSource remoteDataSource,
-                              ProductsLocalDataSource localDataSource) {
+    public ProductsRepository(ProductsRemoteDataSource remoteDataSource,
+                              ProductLocalDataSource localDataSource) {
         mRemoteDataSource = remoteDataSource;
         mLocalDataSource = localDataSource;
     }
 
     public static ProductsRepository getInstance(
-            Context context,
             ProductsRemoteDataSource remoteDataSource,
-            ProductsLocalDataSource localDataSource) {
+            ProductLocalDataSource localDataSource) {
 
         if (sContentRepository == null) {
-            sContentRepository = new ProductsRepository(context, remoteDataSource, localDataSource);
+            sContentRepository = new ProductsRepository(remoteDataSource, localDataSource);
         }
         return sContentRepository;
     }
@@ -43,9 +37,9 @@ public class ProductsRepository {
         mRemoteDataSource.getProducts(new ProductsRemoteDataSource.GetProductsCallback() {
             @Override
             public void onSuccess(BaseResponse baseResponse) {
-                mLocalDataSource.getProducts(baseResponse
+                mLocalDataSource.getProduct(
+                        baseResponse
                         , callback);
-
 
             }
 
@@ -62,7 +56,7 @@ public class ProductsRepository {
      * geting data from productsLocalDataSource
      */
     public interface GetProductsCallback {
-        void onSuccess(List<Products> products);
+        void onSuccess(List<Product> products);
 
         void onError();
     }

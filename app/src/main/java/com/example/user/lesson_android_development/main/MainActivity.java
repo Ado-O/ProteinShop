@@ -6,8 +6,7 @@ import android.util.Log;
 
 import com.example.user.lesson_android_development.Injection;
 import com.example.user.lesson_android_development.R;
-import com.example.user.lesson_android_development.data.ProductImage;
-import com.example.user.lesson_android_development.data.Products;
+import com.example.user.lesson_android_development.data.Product;
 import com.example.user.lesson_android_development.data.storage.ProductsRepository;
 
 import java.util.List;
@@ -29,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
         mRepository = Injection.provideProductsRepository(this);
         mRepository.getProductsContent(new ProductsRepository.GetProductsCallback() {
             @Override
-            public void onSuccess(List<Products> products) {
-                     Log.e(TAG, String.valueOf(products.get(0).getProductDescriptions().size()));
+            public void onSuccess(List<Product> products) {
+                     Log.e(TAG, String.valueOf(products.get(0).getTags().size()));
             }
 
             @Override
@@ -38,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+
 
     }
 

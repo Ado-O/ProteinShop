@@ -9,25 +9,34 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.user.lesson_android_development.data.ProductDescription;
 import com.example.user.lesson_android_development.data.ProductImage;
-import com.example.user.lesson_android_development.data.Products;
+import com.example.user.lesson_android_development.data.Product;
+import com.example.user.lesson_android_development.data.ProductTag;
+import com.example.user.lesson_android_development.data.Tag;
 import com.example.user.lesson_android_development.data.storage.local.productImage.ProductImageDao;
 import com.example.user.lesson_android_development.data.storage.local.productdescription.ProductDescriptionDao;
-import com.example.user.lesson_android_development.data.storage.local.supplement.ProductsDao;
+import com.example.user.lesson_android_development.data.storage.local.product.ProductDao;
+import com.example.user.lesson_android_development.data.storage.local.tag.TagDao;
 
 import java.io.File;
 
 @Database(entities = {
-        Products.class, ProductImage.class, ProductDescription.class
+        Product.class,
+        ProductImage.class,
+        ProductDescription.class,
+        Tag.class,
+        ProductTag.class
 }, version = 5, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase INSTANCE;
 
-    public abstract ProductsDao getProductsDao();
+    public abstract ProductDao getProductsDao();
 
     public abstract ProductImageDao getProductImageDao();
 
     public abstract ProductDescriptionDao getProductDescriptionDao();
+
+    public abstract TagDao getTagDao();
 
     public static final Object sLock = new Object();
 

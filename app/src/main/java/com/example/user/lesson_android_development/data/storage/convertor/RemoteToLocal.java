@@ -1,12 +1,13 @@
 package com.example.user.lesson_android_development.data.storage.convertor;
 
-import android.util.Log;
-
 import com.example.user.lesson_android_development.data.ProductDescription;
 import com.example.user.lesson_android_development.data.ProductImage;
-import com.example.user.lesson_android_development.data.Products;
+import com.example.user.lesson_android_development.data.Product;
+import com.example.user.lesson_android_development.data.ProductTag;
+import com.example.user.lesson_android_development.data.Tag;
 import com.example.user.lesson_android_development.data.storage.remote.response.ProductsResponse;
 import com.example.user.lesson_android_development.data.storage.remote.response.SupplementsResponse;
+import com.example.user.lesson_android_development.data.storage.remote.response.TagsResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,15 +15,18 @@ import java.util.List;
 public class RemoteToLocal {
     public static final String TAG = RemoteToLocal.class.getSimpleName();
 
-    public static List<Products> productsConvertor(List<ProductsResponse> productsResponses) {
+    /**
+     * Main product
+     */
+    public static List<Product> productsConvertor(List<ProductsResponse> productsResponses) {
 
-        List<Products> products = new ArrayList<>();
+        List<Product> products = new ArrayList<>();
 
         for (ProductsResponse p : productsResponses) {
 
 
             products.add(
-                    new Products(
+                    new Product(
                             p.getId(),
                             p.getTitle(),
                             p.getDes(),
@@ -36,6 +40,9 @@ public class RemoteToLocal {
         return products;
     }
 
+    /**
+     *Product image
+     */
     public static List<ProductImage> productImageConverter(
             ProductsResponse productsResponse,
             List<SupplementsResponse> supplementsResponses) {
@@ -62,6 +69,9 @@ public class RemoteToLocal {
         return productImages;
     }
 
+    /**
+     * ProductDescription
+     */
     public static List<ProductDescription> productDescriptionConverter(
             ProductsResponse productsResponse,
             List<SupplementsResponse> supplementsResponses) {
@@ -80,5 +90,35 @@ public class RemoteToLocal {
 
 
         return productDescriptions;
+    }
+
+    /**
+     * Tag
+     */
+    public static List<Tag> tagConverter(List<TagsResponse> tagResponses) {
+        List<Tag> tags = new ArrayList<>();
+
+        for (TagsResponse t : tagResponses) {
+            tags.add(
+                    new Tag(
+                            t.getId(),
+                            t.getName()
+                    )
+            );
+        }
+        return tags;
+    }
+
+    /**
+     * ProductTag
+     */
+    public static List<ProductTag> productTagConverter(long productId, List<Integer> tags) {
+        List<ProductTag> productTags = new ArrayList<>();
+
+        for (long tagId : tags) {
+            productTags.add(new ProductTag(productId, tagId));
+        }
+
+        return productTags;
     }
 }

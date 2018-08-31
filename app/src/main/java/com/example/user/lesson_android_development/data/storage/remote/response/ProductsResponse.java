@@ -37,6 +37,10 @@ public class ProductsResponse implements Serializable{
     @Expose
     private List<Integer> mSuplements = null;
 
+    @SerializedName("tags")
+    @Expose
+    private List<Integer> tags = null;
+
     public long getId() {
         return mId;
     }
@@ -91,5 +95,13 @@ public class ProductsResponse implements Serializable{
 
     public void setSuplements(List<Integer> suplements) {
         mSuplements = suplements;
+    }
+
+    public List<Integer> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Integer> tags) {
+        this.tags = tags;
     }
 }

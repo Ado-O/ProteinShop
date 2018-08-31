@@ -3,16 +3,10 @@ package com.example.user.lesson_android_development.data.storage.remote.content;
 
 import android.content.Context;
 
-import com.example.user.lesson_android_development.data.ProductImage;
-import com.example.user.lesson_android_development.data.Products;
-import com.example.user.lesson_android_development.data.storage.convertor.RemoteToLocal;
-import com.example.user.lesson_android_development.data.storage.remote.response.SupplementsResponse;
 import com.example.user.lesson_android_development.util.MockJson;
 import com.example.user.lesson_android_development.data.storage.remote.response.BaseResponse;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
-import java.util.List;
 
 public class ProductsRemoteDataSource {
 

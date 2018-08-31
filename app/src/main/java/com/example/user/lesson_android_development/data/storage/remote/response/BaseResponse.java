@@ -17,6 +17,10 @@ public class BaseResponse implements Serializable {
     @Expose
     private List<ProductsResponse> mProducts;
 
+    @SerializedName("tags")
+    @Expose
+    private List<TagsResponse> mTagsResponses;
+
     public List<SupplementsResponse> getSuplements() {
         return mSuplements;
     }
@@ -33,4 +37,11 @@ public class BaseResponse implements Serializable {
         mProducts = products;
     }
 
+    public List<TagsResponse> getTagsResponses() {
+        return mTagsResponses;
+    }
+
+    public void setTagsResponses(List<TagsResponse> tagsResponses) {
+        mTagsResponses = tagsResponses;
+    }
 }

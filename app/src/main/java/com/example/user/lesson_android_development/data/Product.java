@@ -8,7 +8,7 @@ import android.arch.persistence.room.PrimaryKey;
 import java.util.List;
 
 @Entity(tableName = "products_table")
-public class Products {
+public class Product {
 
     @ColumnInfo(name = "_id")
     @PrimaryKey(autoGenerate = true)
@@ -35,7 +35,10 @@ public class Products {
     @Ignore
     private List<ProductDescription> mProductDescriptions = null;
 
-    public Products(long id, String title, String des, String price, String discounte, String pictures) {
+    @Ignore
+    private List<Tag> mTags = null;
+
+    public Product(long id, String title, String des, String price, String discounte, String pictures) {
         mId = id;
         mTitle = title;
         mDes = des;
@@ -106,5 +109,13 @@ public class Products {
 
     public void setProductDescriptions(List<ProductDescription> productDescriptions) {
         mProductDescriptions = productDescriptions;
+    }
+
+    public List<Tag> getTags() {
+        return mTags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        mTags = tags;
     }
 }
