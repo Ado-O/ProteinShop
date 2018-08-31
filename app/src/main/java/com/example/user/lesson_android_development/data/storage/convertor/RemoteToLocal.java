@@ -1,22 +1,27 @@
 package com.example.user.lesson_android_development.data.storage.convertor;
 
-import com.example.user.lesson_android_development.data.Supplement;
+import android.util.Log;
+
+import com.example.user.lesson_android_development.data.ProductImage;
+import com.example.user.lesson_android_development.data.Products;
 import com.example.user.lesson_android_development.data.storage.remote.response.ProductsResponse;
+import com.example.user.lesson_android_development.data.storage.remote.response.SupplementsResponse;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RemoteToLocal {
+    public static final String TAG = RemoteToLocal.class.getSimpleName();
 
-    public static List<Supplement> productsConvertor(List<ProductsResponse> productsResponses) {
+    public static List<Products> productsConvertor(List<ProductsResponse> productsResponses) {
 
-        List<Supplement> supplements = new ArrayList<>();
+        List<Products> products = new ArrayList<>();
 
         for (ProductsResponse p : productsResponses) {
 
 
-            supplements.add(
-                    new Supplement(
+            products.add(
+                    new Products(
                             p.getId(),
                             p.getTitle(),
                             p.getDes(),
@@ -27,6 +32,34 @@ public class RemoteToLocal {
 
             );
         }
-        return supplements;
+        return products;
+    }
+
+    public static List<ProductImage> productImageConverter(
+            ProductsResponse productsResponse,
+            List<SupplementsResponse> supplementsResponses) {
+
+        List<ProductImage> productImages = new ArrayList<>();
+
+        if (productsResponse.getPictures() != null && productsResponse.getPictures().size() > 0) {
+            productImages.add(new ProductImage(productsResponse.getId(), productsResponse.getPictures().get(0)));
+        }
+
+        if (productsResponse.getSuplements().size() > 1) {
+            for (long sId : productsResponse.getSuplements()) {
+                for (SupplementsResponse s : supplementsResponses) {
+                    if (sId ==s.getId()) {
+                        for(String imageUrl:s.getPictures()){
+                            productImages.add(new ProductImage(productsResponse.getId(),imageUrl));
+                        }
+                        break;
+                    }
+                }
+            }
+
+        }
+
+
+        return productImages;
     }
 }

@@ -1,4 +1,4 @@
-package com.example.user.lesson_android_development.util;
+package com.example.user.lesson_android_development;
 
 import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.MutableLiveData;

@@ -5,23 +5,23 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 
-import com.example.user.lesson_android_development.data.Supplement;
+import com.example.user.lesson_android_development.data.Products;
 
 import java.util.List;
 
 @Dao
-public interface SupplementsDao {
+public interface ProductsDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(List<Supplement> supplements);
+    void insert(List<Products> products);
 
     //in this line we teak everting from exercise table
-    @Query("SELECT * FROM supplement_table WHERE _id = :id")
-    Supplement getSupplement(long id);
+    @Query("SELECT * FROM products_table WHERE _id = :id")
+    Products getSupplement(long id);
 
-    @Query("SELECT * FROM supplement_table")
-    List<Supplement> getSupplements();
+    @Query("SELECT * FROM products_table")
+    List<Products> getSupplements();
 
-    @Query("DELETE FROM supplement_table")
+    @Query("DELETE FROM products_table")
     void clear();
 }

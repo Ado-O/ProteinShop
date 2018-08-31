@@ -6,8 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.util.List;
 
-public class ProductsResponse implements Serializable{
-
+public class SupplementsResponse implements Serializable{
 
     @SerializedName("id")
     @Expose
@@ -25,17 +24,12 @@ public class ProductsResponse implements Serializable{
     @Expose
     private List<String> mPictures = null;
 
-    @SerializedName("price")
-    @Expose
-    private String mPrice;
-
-    @SerializedName("discounted")
-    @Expose
-    private String mDiscounte;
-
-    @SerializedName("suplements")
-    @Expose
-    private List<Integer> mSuplements = null;
+    public SupplementsResponse(long id, String title, String des, List<String> pictures) {
+        mId = id;
+        mTitle = title;
+        mDes = des;
+        mPictures = pictures;
+    }
 
     public long getId() {
         return mId;
@@ -67,29 +61,5 @@ public class ProductsResponse implements Serializable{
 
     public void setPictures(List<String> pictures) {
         mPictures = pictures;
-    }
-
-    public String getPrice() {
-        return mPrice;
-    }
-
-    public void setPrice(String price) {
-        mPrice = price;
-    }
-
-    public String getDiscounte() {
-        return mDiscounte;
-    }
-
-    public void setDiscounte(String discounte) {
-        mDiscounte = discounte;
-    }
-
-    public List<Integer> getSuplements() {
-        return mSuplements;
-    }
-
-    public void setSuplements(List<Integer> suplements) {
-        mSuplements = suplements;
     }
 }

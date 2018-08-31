@@ -1,4 +1,4 @@
-package com.example.user.lesson_android_development.util;
+package com.example.user.lesson_android_development;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
@@ -8,8 +8,6 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.FragmentActivity;
-
-import com.example.user.lesson_android_development.Injection;
 
 public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
     @SuppressLint("StaticFieldLeak")
