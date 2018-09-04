@@ -7,7 +7,6 @@ import java.io.Serializable;
 
 public class TagsResponse implements Serializable{
 
-
     @SerializedName("id")
     @Expose
     private long mId;

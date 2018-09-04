@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.util.List;
 
-public class ProductsResponse implements Serializable{
+public class ProductResponse implements Serializable{
 
 
     @SerializedName("id")

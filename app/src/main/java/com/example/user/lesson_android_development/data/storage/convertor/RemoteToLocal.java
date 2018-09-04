@@ -1,12 +1,13 @@
 package com.example.user.lesson_android_development.data.storage.convertor;
 
-import com.example.user.lesson_android_development.data.CartItem;
+import com.example.user.lesson_android_development.data.MostSoldItem;
 import com.example.user.lesson_android_development.data.ProductDescription;
 import com.example.user.lesson_android_development.data.ProductImage;
 import com.example.user.lesson_android_development.data.Product;
 import com.example.user.lesson_android_development.data.ProductTag;
 import com.example.user.lesson_android_development.data.Tag;
-import com.example.user.lesson_android_development.data.storage.remote.response.ProductsResponse;
+import com.example.user.lesson_android_development.data.storage.remote.response.BaseResponse;
+import com.example.user.lesson_android_development.data.storage.remote.response.ProductResponse;
 import com.example.user.lesson_android_development.data.storage.remote.response.SupplementsResponse;
 import com.example.user.lesson_android_development.data.storage.remote.response.TagsResponse;
 
@@ -19,11 +20,11 @@ public class RemoteToLocal {
     /**
      * Main product
      */
-    public static List<Product> productsConvertor(List<ProductsResponse> productsResponses) {
+    public static List<Product> productsConvertor(List<ProductResponse> productsResponses) {
 
         List<Product> products = new ArrayList<>();
 
-        for (ProductsResponse p : productsResponses) {
+        for (ProductResponse p : productsResponses) {
 
 
             products.add(
@@ -45,7 +46,7 @@ public class RemoteToLocal {
      * Product image
      */
     public static List<ProductImage> productImageConverter(
-            ProductsResponse productsResponse,
+            ProductResponse productsResponse,
             List<SupplementsResponse> supplementsResponses) {
 
         List<ProductImage> productImages = new ArrayList<>();
@@ -74,13 +75,13 @@ public class RemoteToLocal {
      * ProductDescription
      */
     public static List<ProductDescription> productDescriptionConverter(
-            ProductsResponse productsResponse,
+            ProductResponse productsResponse,
             List<SupplementsResponse> supplementsResponses) {
         List<ProductDescription> productDescriptions = new ArrayList<>();
 
         if (productsResponse.getSuplements().size() > 1) {
             for (long sId : productsResponse.getSuplements()) { //get ever id from productResponse
-                for (SupplementsResponse s : supplementsResponses) { //get everting from supplementResponse
+                for (SupplementsResponse s : supplementsResponses) { //get eventing from supplementResponse
                     if (sId == s.getId()) { //compare id which we get from productsResponse.getSuplements() to supplementResponse
                         productDescriptions.add(new ProductDescription(productsResponse.getId(), s.getTitle(), s.getDes()));
                         break;
@@ -128,4 +129,22 @@ public class RemoteToLocal {
         return productTags;
     }
 
+
+    public static List<MostSoldItem> mostSoldItemsConverter(
+            BaseResponse baseResponse,
+            List<ProductResponse> productsResponses) {
+
+        List<MostSoldItem> mostSoldItems = new ArrayList<>();
+
+        for (int position : baseResponse.getMostSoldItem()) {
+            for (ProductResponse p : productsResponses) {
+                if (position == p.getId()) {
+                    mostSoldItems.add(new MostSoldItem(p.getId()));
+                    break;
+                }
+            }
+        }
+        return mostSoldItems;
+
+    }
 }

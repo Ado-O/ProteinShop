@@ -15,11 +15,15 @@ public class BaseResponse implements Serializable {
 
     @SerializedName("products")
     @Expose
-    private List<ProductsResponse> mProducts;
+    private List<ProductResponse> mProducts;
 
     @SerializedName("tags")
     @Expose
     private List<TagsResponse> mTagsResponses;
+
+    @SerializedName("most_sold")
+    @Expose
+    private List<Integer> mMostSoldItem;
 
     public List<SupplementsResponse> getSuplements() {
         return mSuplements;
@@ -29,11 +33,11 @@ public class BaseResponse implements Serializable {
         mSuplements = suplements;
     }
 
-    public List<ProductsResponse> getProducts() {
+    public List<ProductResponse> getProducts() {
         return mProducts;
     }
 
-    public void setProducts(List<ProductsResponse> products) {
+    public void setProducts(List<ProductResponse> products) {
         mProducts = products;
     }
 
@@ -43,5 +47,13 @@ public class BaseResponse implements Serializable {
 
     public void setTagsResponses(List<TagsResponse> tagsResponses) {
         mTagsResponses = tagsResponses;
+    }
+
+    public List<Integer> getMostSoldItem() {
+        return mMostSoldItem;
+    }
+
+    public void setMostSoldItem(List<Integer> mostSoldItem) {
+        mMostSoldItem = mostSoldItem;
     }
 }

@@ -8,12 +8,14 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.user.lesson_android_development.data.CartItem;
+import com.example.user.lesson_android_development.data.MostSoldItem;
 import com.example.user.lesson_android_development.data.ProductDescription;
 import com.example.user.lesson_android_development.data.ProductImage;
 import com.example.user.lesson_android_development.data.Product;
 import com.example.user.lesson_android_development.data.ProductTag;
 import com.example.user.lesson_android_development.data.Tag;
 import com.example.user.lesson_android_development.data.storage.local.cartitem.CartItemDao;
+import com.example.user.lesson_android_development.data.storage.local.mostsolditem.MostSoldItemDao;
 import com.example.user.lesson_android_development.data.storage.local.productImage.ProductImageDao;
 import com.example.user.lesson_android_development.data.storage.local.productdescription.ProductDescriptionDao;
 import com.example.user.lesson_android_development.data.storage.local.product.ProductDao;
@@ -27,8 +29,9 @@ import java.io.File;
         ProductDescription.class,
         Tag.class,
         ProductTag.class,
-        CartItem.class
-}, version = 5, exportSchema = false)
+        CartItem.class,
+        MostSoldItem.class
+}, version = 7, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase INSTANCE;
@@ -42,6 +45,8 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract TagDao getTagDao();
 
     public abstract CartItemDao getCartItemDao();
+
+    public abstract MostSoldItemDao getMostSoldItemDao();
 
     public static final Object sLock = new Object();
 

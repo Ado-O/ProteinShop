@@ -4,11 +4,20 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-
-    <!--regular color-->
     <color name="colorWhite">#ffff</color>
     <color name="colorBlack">#000</color>
-    <color name="colorRed">#e80909</color>
-    <color name="colorBlue">#4286f4</color>
-    <color name="colorGreen">#42f46e</color>
+
+    <!--toolbar-->
+    <color name="colorToolbar">#ED3F3E</color>
+
+    <!--checkout button-->
+    <color name="colorButton">#8BC34A</color>
+
+    <!--shop-->
+    <color name="colorShop">#3D5AFE</color>
+
+    <!--text color-->
+    <color name="colorTextBlack">#424242</color>
+    <color name="colorTextWhite">#F2F2F2</color>
+
 </resources>

@@ -1,17 +1,16 @@
 package com.example.user.lesson_android_development.data.storage.local.product;
 
-import android.util.Log;
-
+import com.example.user.lesson_android_development.data.MostSoldItem;
 import com.example.user.lesson_android_development.data.Product;
-import com.example.user.lesson_android_development.data.ProductTag;
 import com.example.user.lesson_android_development.data.Tag;
 import com.example.user.lesson_android_development.data.storage.ProductsRepository;
 import com.example.user.lesson_android_development.data.storage.convertor.RemoteToLocal;
+import com.example.user.lesson_android_development.data.storage.local.mostsolditem.MostSoldItemDao;
 import com.example.user.lesson_android_development.data.storage.local.productImage.ProductImageDao;
 import com.example.user.lesson_android_development.data.storage.local.productdescription.ProductDescriptionDao;
 import com.example.user.lesson_android_development.data.storage.local.tag.TagDao;
 import com.example.user.lesson_android_development.data.storage.remote.response.BaseResponse;
-import com.example.user.lesson_android_development.data.storage.remote.response.ProductsResponse;
+import com.example.user.lesson_android_development.data.storage.remote.response.ProductResponse;
 import com.example.user.lesson_android_development.data.storage.remote.response.SupplementsResponse;
 import com.example.user.lesson_android_development.data.storage.remote.response.TagsResponse;
 import com.example.user.lesson_android_development.util.AppExecutors;
@@ -29,27 +28,31 @@ public class ProductLocalDataSource {
     private final ProductImageDao mProductImageDao;
     private final ProductDescriptionDao mProductDescriptionDao;
     private final TagDao mTagDao;
+    private final MostSoldItemDao mMostSoldItemDao;
 
 
     private ProductLocalDataSource(ProductDao productDao,
                                    AppExecutors appExecutors,
                                    ProductImageDao productImageDao,
                                    ProductDescriptionDao productDescriptionDao,
-                                   TagDao tagDao) {
+                                   TagDao tagDao,
+                                   MostSoldItemDao mostSoldItemDao) {
         mProductDao = productDao;
         mAppExecutors = appExecutors;
         mProductImageDao = productImageDao;
         mProductDescriptionDao = productDescriptionDao;
         mTagDao = tagDao;
+        mMostSoldItemDao = mostSoldItemDao;
     }
 
     public static ProductLocalDataSource getInstance(ProductDao productDao,
                                                      AppExecutors appExecutors,
                                                      ProductImageDao productImageDao,
                                                      ProductDescriptionDao productDescriptionDao,
-                                                     TagDao tagDao) {
+                                                     TagDao tagDao,
+                                                     MostSoldItemDao mostSoldItemDao) {
         if (sInstance == null) {
-            sInstance = new ProductLocalDataSource(productDao, appExecutors, productImageDao, productDescriptionDao, tagDao);
+            sInstance = new ProductLocalDataSource(productDao, appExecutors, productImageDao, productDescriptionDao, tagDao, mostSoldItemDao);
         }
         return sInstance;
     }
@@ -66,18 +69,17 @@ public class ProductLocalDataSource {
         mAppExecutors.diskIO().execute(() -> {
 
             List<SupplementsResponse> supplements = baseResponse.getSuplements();
-            List<ProductsResponse> productsResponses = baseResponse.getProducts();
-
+            List<ProductResponse> productsResponses = baseResponse.getProducts();
             List<TagsResponse> tagsResponses = baseResponse.getTagsResponses();
 
             /**
-             * insert data in localDB
+             * product
              */
             if (productsResponses != null && !productsResponses.isEmpty()) {
                 mProductDao.clear();
                 mProductImageDao.clear();
                 mProductDescriptionDao.clear();
-
+                mMostSoldItemDao.clear();
 
                 mProductDao.insert(
                         RemoteToLocal.productsConvertor(productsResponses));
@@ -86,7 +88,13 @@ public class ProductLocalDataSource {
                         RemoteToLocal.tagConverter(tagsResponses)
                 );
 
-                for (ProductsResponse p : productsResponses) {
+                //??
+                mMostSoldItemDao.insert(RemoteToLocal.mostSoldItemsConverter(
+                        baseResponse,
+                        productsResponses
+                ));
+
+                for (ProductResponse p : productsResponses) {
 
                     //image
                     mProductImageDao.insert(
@@ -111,6 +119,10 @@ public class ProductLocalDataSource {
                 }
             }
 
+
+            //??
+            final List<MostSoldItem> mostSoldItems = mMostSoldItemDao.getMostSoldItem();
+
             final List<Product> products = mProductDao.getProduct();
 
             for (Product p : products) {
@@ -121,11 +133,11 @@ public class ProductLocalDataSource {
                 //tags
                 p.setTags(mProductDao.getProductTags(p.getId()));
             }
-            mAppExecutors.mainThread().execute(() -> callback.onSuccess(products));
+            mAppExecutors.mainThread().execute(() -> callback.onSuccess(products, mostSoldItems));
         });
     }
 
-    public void getFilteredProduct(Tag tag, ProductsRepository.GetProductsCallback callback) {
+    public void getFilteredProduct(Tag tag, ProductsRepository.GetFilterCallback callback) {
         mAppExecutors.diskIO().execute(() -> {
             final List<Product> products = mProductDao.getFilteredProducts(tag.getId());
 

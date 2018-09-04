@@ -1,6 +1,9 @@
 package com.example.user.lesson_android_development.data.storage;
 
+import android.widget.Toast;
+
 import com.example.user.lesson_android_development.data.CartItem;
+import com.example.user.lesson_android_development.data.MostSoldItem;
 import com.example.user.lesson_android_development.data.Product;
 import com.example.user.lesson_android_development.data.ProductCartItem;
 import com.example.user.lesson_android_development.data.Tag;
@@ -58,28 +61,32 @@ public class ProductsRepository {
         });
     }
 
-
-    public void getFilteredProducts(Tag tag, GetProductsCallback callback) {
-        mLocalDataSource.getFilteredProduct(tag, callback);
-    }
-
-
+    /*
+   get all tags
+    */
     public void getAllTags(GetAllTagsCallback callback) {
 
         mLocalDataSource.getAllTags(callback);
 
     }
 
-    public void getCardItem(GetCardItemCallback callback){
+    public void getFilteredProducts(Tag tag, GetFilterCallback callback) {
+        mLocalDataSource.getFilteredProduct(tag, callback);
+    }
+
+    /*
+    get all cartItem
+     */
+    public void getCardItem(GetCardItemCallback callback) {
         mCartItemLocalDataSource.getCartItems(callback);
 
     }
 
-    public void insertCardItem(long id, int quantity){
+    public void insertCardItem(long id, int quantity) {
         mCartItemLocalDataSource.addCartItem(id, quantity);
     }
 
-    public void clearCardItem(long id){
+    public void clearCardItem(long id) {
         mCartItemLocalDataSource.clearCartItem(id);
     }
 
@@ -87,10 +94,20 @@ public class ProductsRepository {
      * geting data from productsLocalDataSource
      */
     public interface GetProductsCallback {
-        void onSuccess(List<Product> products);
+        void onSuccess(List<Product> products, List<MostSoldItem> mostSoldItems);
 
         void onError();
     }
+
+    /**
+     * filter
+     */
+    public interface GetFilterCallback{
+        void onSuccess(List<Product>products);
+
+        void onError();
+    }
+
 
     /**
      * geting data from tag
@@ -104,7 +121,7 @@ public class ProductsRepository {
     /**
      * geting cartItem Data
      */
-    public interface GetCardItemCallback{
+    public interface GetCardItemCallback {
         void onSuccess(List<ProductCartItem> productCartItems);
 
         void onError();

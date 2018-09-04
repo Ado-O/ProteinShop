@@ -29,7 +29,8 @@ public class Injection {
                 provideAppExecutors(),
                 provideAppDatabase(context.getApplicationContext()).getProductImageDao(),
                 provideAppDatabase(context.getApplicationContext()).getProductDescriptionDao(),
-                provideAppDatabase(context.getApplicationContext()).getTagDao()
+                provideAppDatabase(context.getApplicationContext()).getTagDao(),
+                provideAppDatabase(context.getApplicationContext()).getMostSoldItemDao()
         );
     }
 
