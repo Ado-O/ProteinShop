@@ -17,4 +17,5 @@ public interface TagDao {
 
     @Query("SELECT * FROM tag_table")
     List<Tag> getTags();
+
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.example.user.lesson_android_development.data.storage.ProductsRepository;
 import com.example.user.lesson_android_development.data.storage.local.AppDatabase;
+import com.example.user.lesson_android_development.data.storage.local.cartitem.CartItemLocalDataSource;
 import com.example.user.lesson_android_development.data.storage.local.product.ProductLocalDataSource;
 import com.example.user.lesson_android_development.data.storage.remote.content.ProductsRemoteDataSource;
 import com.example.user.lesson_android_development.util.AppExecutors;
@@ -32,10 +33,19 @@ public class Injection {
         );
     }
 
+    public static CartItemLocalDataSource provideCartItemLocalDataSource(Context context){
+        return CartItemLocalDataSource.getInstance(
+                provideAppExecutors(),
+                provideAppDatabase(context.getApplicationContext()).getCartItemDao(),
+                provideAppDatabase(context.getApplicationContext()).getProductsDao()
+        );
+    }
+
     public static ProductsRepository provideProductsRepository(Context context){
         return ProductsRepository.getInstance(
                 provideProductsRemoteDataSource(context),
-                provideProductsLocalDataSource(context)
+                provideProductsLocalDataSource(context),
+                provideCartItemLocalDataSource(context)
         );
     }
 

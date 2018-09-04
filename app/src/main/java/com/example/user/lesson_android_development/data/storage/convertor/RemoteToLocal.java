@@ -1,5 +1,6 @@
 package com.example.user.lesson_android_development.data.storage.convertor;
 
+import com.example.user.lesson_android_development.data.CartItem;
 import com.example.user.lesson_android_development.data.ProductDescription;
 import com.example.user.lesson_android_development.data.ProductImage;
 import com.example.user.lesson_android_development.data.Product;
@@ -41,7 +42,7 @@ public class RemoteToLocal {
     }
 
     /**
-     *Product image
+     * Product image
      */
     public static List<ProductImage> productImageConverter(
             ProductsResponse productsResponse,
@@ -116,9 +117,15 @@ public class RemoteToLocal {
         List<ProductTag> productTags = new ArrayList<>();
 
         for (long tagId : tags) {
-            productTags.add(new ProductTag(productId, tagId));
+            productTags.add(
+                    new ProductTag(
+                            productId,
+                            tagId
+                    )
+            );
         }
 
         return productTags;
     }
+
 }

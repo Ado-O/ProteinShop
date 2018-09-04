@@ -38,6 +38,9 @@ public class Product {
     @Ignore
     private List<Tag> mTags = null;
 
+    @Ignore
+    private List<CartItem> mCartItems = null;
+
     public Product(long id, String title, String des, String price, String discounte, String pictures) {
         mId = id;
         mTitle = title;
@@ -117,5 +120,13 @@ public class Product {
 
     public void setTags(List<Tag> tags) {
         mTags = tags;
+    }
+
+    public List<CartItem> getCartItems() {
+        return mCartItems;
+    }
+
+    public void setCartItems(List<CartItem> cartItems) {
+        mCartItems = cartItems;
     }
 }

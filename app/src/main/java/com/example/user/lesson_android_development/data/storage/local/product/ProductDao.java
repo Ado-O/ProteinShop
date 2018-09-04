@@ -17,18 +17,22 @@ public interface ProductDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(List<Product> products);
 
-    //in this line we teak everting from exercise table
-    @Query("SELECT * FROM products_table WHERE _id = :id")
-    Product getSupplement(long id);
-
     @Query("SELECT * FROM products_table")
-    List<Product> getSupplements();
+    List<Product> getProduct();
+
+    @Query("SELECT products_table.* FROM products_table " +
+            "LEFT JOIN product_tag_table " +
+            "ON products_table._id = product_tag_table.product_id " +
+            "WHERE product_tag_table.tag_id = :tagId")
+    List<Product> getFilteredProducts(long tagId);
 
     @Query("DELETE FROM products_table")
     void clear();
 
-    @Query("SELECT tag_table.* FROM tag_table INNER JOIN product_tag_table ON " +
-            "tag_table._id= product_tag_table.tag_id WHERE product_tag_table.product_id = :productId")
+    @Query("SELECT tag_table.* FROM tag_table " +
+            "INNER JOIN product_tag_table " +
+            "ON tag_table._id= product_tag_table.tag_id " +
+            "WHERE product_tag_table.product_id = :productId")
     List<Tag> getProductTags(long productId);
 
     @Insert

@@ -7,11 +7,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.user.lesson_android_development.data.CartItem;
 import com.example.user.lesson_android_development.data.ProductDescription;
 import com.example.user.lesson_android_development.data.ProductImage;
 import com.example.user.lesson_android_development.data.Product;
 import com.example.user.lesson_android_development.data.ProductTag;
 import com.example.user.lesson_android_development.data.Tag;
+import com.example.user.lesson_android_development.data.storage.local.cartitem.CartItemDao;
 import com.example.user.lesson_android_development.data.storage.local.productImage.ProductImageDao;
 import com.example.user.lesson_android_development.data.storage.local.productdescription.ProductDescriptionDao;
 import com.example.user.lesson_android_development.data.storage.local.product.ProductDao;
@@ -24,7 +26,8 @@ import java.io.File;
         ProductImage.class,
         ProductDescription.class,
         Tag.class,
-        ProductTag.class
+        ProductTag.class,
+        CartItem.class
 }, version = 5, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
@@ -37,6 +40,8 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract ProductDescriptionDao getProductDescriptionDao();
 
     public abstract TagDao getTagDao();
+
+    public abstract CartItemDao getCartItemDao();
 
     public static final Object sLock = new Object();
 

@@ -1,6 +1,10 @@
 package com.example.user.lesson_android_development.data.storage;
 
+import com.example.user.lesson_android_development.data.CartItem;
 import com.example.user.lesson_android_development.data.Product;
+import com.example.user.lesson_android_development.data.ProductCartItem;
+import com.example.user.lesson_android_development.data.Tag;
+import com.example.user.lesson_android_development.data.storage.local.cartitem.CartItemLocalDataSource;
 import com.example.user.lesson_android_development.data.storage.local.product.ProductLocalDataSource;
 import com.example.user.lesson_android_development.data.storage.remote.content.ProductsRemoteDataSource;
 import com.example.user.lesson_android_development.data.storage.remote.response.BaseResponse;
@@ -15,19 +19,23 @@ public class ProductsRepository {
 
     private final ProductsRemoteDataSource mRemoteDataSource;
     private final ProductLocalDataSource mLocalDataSource;
+    private final CartItemLocalDataSource mCartItemLocalDataSource;
 
     public ProductsRepository(ProductsRemoteDataSource remoteDataSource,
-                              ProductLocalDataSource localDataSource) {
+                              ProductLocalDataSource localDataSource,
+                              CartItemLocalDataSource cartItemLocalDataSource) {
         mRemoteDataSource = remoteDataSource;
         mLocalDataSource = localDataSource;
+        mCartItemLocalDataSource = cartItemLocalDataSource;
     }
 
     public static ProductsRepository getInstance(
             ProductsRemoteDataSource remoteDataSource,
-            ProductLocalDataSource localDataSource) {
+            ProductLocalDataSource localDataSource,
+            CartItemLocalDataSource cartItemLocalDataSource) {
 
         if (sContentRepository == null) {
-            sContentRepository = new ProductsRepository(remoteDataSource, localDataSource);
+            sContentRepository = new ProductsRepository(remoteDataSource, localDataSource, cartItemLocalDataSource);
         }
         return sContentRepository;
     }
@@ -48,8 +56,31 @@ public class ProductsRepository {
 
             }
         });
+    }
 
 
+    public void getFilteredProducts(Tag tag, GetProductsCallback callback) {
+        mLocalDataSource.getFilteredProduct(tag, callback);
+    }
+
+
+    public void getAllTags(GetAllTagsCallback callback) {
+
+        mLocalDataSource.getAllTags(callback);
+
+    }
+
+    public void getCardItem(GetCardItemCallback callback){
+        mCartItemLocalDataSource.getCartItems(callback);
+
+    }
+
+    public void insertCardItem(long id, int quantity){
+        mCartItemLocalDataSource.addCartItem(id, quantity);
+    }
+
+    public void clearCardItem(long id){
+        mCartItemLocalDataSource.clearCartItem(id);
     }
 
     /**
@@ -57,6 +88,24 @@ public class ProductsRepository {
      */
     public interface GetProductsCallback {
         void onSuccess(List<Product> products);
+
+        void onError();
+    }
+
+    /**
+     * geting data from tag
+     */
+    public interface GetAllTagsCallback {
+        void onSuccess(List<Tag> tags);
+
+        void onError();
+    }
+
+    /**
+     * geting cartItem Data
+     */
+    public interface GetCardItemCallback{
+        void onSuccess(List<ProductCartItem> productCartItems);
 
         void onError();
     }

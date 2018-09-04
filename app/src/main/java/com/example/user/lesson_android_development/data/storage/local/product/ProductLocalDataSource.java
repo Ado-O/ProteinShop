@@ -1,6 +1,10 @@
 package com.example.user.lesson_android_development.data.storage.local.product;
 
+import android.util.Log;
+
 import com.example.user.lesson_android_development.data.Product;
+import com.example.user.lesson_android_development.data.ProductTag;
+import com.example.user.lesson_android_development.data.Tag;
 import com.example.user.lesson_android_development.data.storage.ProductsRepository;
 import com.example.user.lesson_android_development.data.storage.convertor.RemoteToLocal;
 import com.example.user.lesson_android_development.data.storage.local.productImage.ProductImageDao;
@@ -15,6 +19,8 @@ import com.example.user.lesson_android_development.util.AppExecutors;
 import java.util.List;
 
 public class ProductLocalDataSource {
+
+    private static final String TAG = ProductLocalDataSource.class.getSimpleName();
 
     private static ProductLocalDataSource sInstance = null;
 
@@ -56,10 +62,12 @@ public class ProductLocalDataSource {
     public void getProduct(BaseResponse baseResponse,
                            final ProductsRepository.GetProductsCallback callback) {
 
+
         mAppExecutors.diskIO().execute(() -> {
 
             List<SupplementsResponse> supplements = baseResponse.getSuplements();
             List<ProductsResponse> productsResponses = baseResponse.getProducts();
+
             List<TagsResponse> tagsResponses = baseResponse.getTagsResponses();
 
             /**
@@ -103,10 +111,7 @@ public class ProductLocalDataSource {
                 }
             }
 
-            /**
-             * get same data from localDB
-             */
-            final List<Product> products = mProductDao.getSupplements();
+            final List<Product> products = mProductDao.getProduct();
 
             for (Product p : products) {
                 //image
@@ -115,9 +120,45 @@ public class ProductLocalDataSource {
                 p.setProductDescriptions(mProductDescriptionDao.getProductDescription(p.getId()));
                 //tags
                 p.setTags(mProductDao.getProductTags(p.getId()));
-
             }
             mAppExecutors.mainThread().execute(() -> callback.onSuccess(products));
         });
     }
+
+    public void getFilteredProduct(Tag tag, ProductsRepository.GetProductsCallback callback) {
+        mAppExecutors.diskIO().execute(() -> {
+            final List<Product> products = mProductDao.getFilteredProducts(tag.getId());
+
+            for (Product p : products) {
+                //image
+                p.setProductImages(mProductImageDao.getProductImage(p.getId()));
+                //description
+                p.setProductDescriptions(mProductDescriptionDao.getProductDescription(p.getId()));
+                //tags
+                p.setTags(mProductDao.getProductTags(p.getId()));
+            }
+            mAppExecutors.mainThread().execute(() -> callback.onSuccess(products));
+        });
+
+    }
+
+    public void getAllTags(ProductsRepository.GetAllTagsCallback callback) {
+        mAppExecutors.diskIO().execute(() -> {
+            List<Tag> allTags = mTagDao.getTags();
+
+            mAppExecutors.mainThread().execute(() -> {
+                if (allTags != null && allTags.size() > 0) {
+                    callback.onSuccess(allTags);
+                } else {
+                    callback.onError();
+                }
+            });
+
+        });
+
+    }
+
+
 }
+
+
