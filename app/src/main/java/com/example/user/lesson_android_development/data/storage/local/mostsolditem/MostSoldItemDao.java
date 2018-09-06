@@ -14,9 +14,6 @@ public interface MostSoldItemDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(List<MostSoldItem> mostSoldItem);
 
-    @Query("SELECT * FROM most_sold_item_table")
-    List<MostSoldItem> getMostSoldItem();
-
     @Query("DELETE FROM most_sold_item_table")
     void clear();
 }

@@ -51,7 +51,6 @@ public class ProductsRepository {
                 mLocalDataSource.getProduct(
                         baseResponse
                         , callback);
-
             }
 
             @Override
@@ -70,12 +69,22 @@ public class ProductsRepository {
 
     }
 
+    /*
+    filter
+     */
     public void getFilteredProducts(Tag tag, GetFilterCallback callback) {
         mLocalDataSource.getFilteredProduct(tag, callback);
     }
 
     /*
-    get all cartItem
+    most sold
+     */
+    public void getMostSoldItem(GetMostSoldItem callback){
+        mLocalDataSource.getMostSoldItem(callback);
+    }
+
+    /*
+    get cartItem
      */
     public void getCardItem(GetCardItemCallback callback) {
         mCartItemLocalDataSource.getCartItems(callback);
@@ -94,7 +103,16 @@ public class ProductsRepository {
      * geting data from productsLocalDataSource
      */
     public interface GetProductsCallback {
-        void onSuccess(List<Product> products, List<MostSoldItem> mostSoldItems);
+        void onSuccess(List<Product> products);
+
+        void onError();
+    }
+
+    /**
+     * mostSoldItem
+     */
+    public interface GetMostSoldItem{
+        void onSuccess(List<Product>products);
 
         void onError();
     }

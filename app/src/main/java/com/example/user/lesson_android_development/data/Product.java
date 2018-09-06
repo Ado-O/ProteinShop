@@ -4,7 +4,10 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
+import android.os.Parcel;
+import android.os.Parcelable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(tableName = "products_table")
@@ -129,4 +132,6 @@ public class Product {
     public void setCartItems(List<CartItem> cartItems) {
         mCartItems = cartItems;
     }
+
+
 }

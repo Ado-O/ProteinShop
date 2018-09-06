@@ -35,6 +35,11 @@ public interface ProductDao {
             "WHERE product_tag_table.product_id = :productId")
     List<Tag> getProductTags(long productId);
 
+    @Query("SELECT products_table.* FROM products_table " +
+            "LEFT JOIN most_sold_item_table " +
+            "ON products_table._id = most_sold_item_table.product_id ")
+    List<Product> getMostSoldItems();
+
     @Insert
     void insertProductTags(List<ProductTag> productTags);
 

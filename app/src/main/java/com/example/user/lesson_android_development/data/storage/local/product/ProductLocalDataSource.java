@@ -90,8 +90,7 @@ public class ProductLocalDataSource {
 
                 //??
                 mMostSoldItemDao.insert(RemoteToLocal.mostSoldItemsConverter(
-                        baseResponse,
-                        productsResponses
+                        baseResponse
                 ));
 
                 for (ProductResponse p : productsResponses) {
@@ -119,10 +118,6 @@ public class ProductLocalDataSource {
                 }
             }
 
-
-            //??
-            final List<MostSoldItem> mostSoldItems = mMostSoldItemDao.getMostSoldItem();
-
             final List<Product> products = mProductDao.getProduct();
 
             for (Product p : products) {
@@ -133,7 +128,25 @@ public class ProductLocalDataSource {
                 //tags
                 p.setTags(mProductDao.getProductTags(p.getId()));
             }
-            mAppExecutors.mainThread().execute(() -> callback.onSuccess(products, mostSoldItems));
+
+            mAppExecutors.mainThread().execute(() -> callback.onSuccess(products));
+        });
+    }
+
+    public void getMostSoldItem(ProductsRepository.GetMostSoldItem callback){
+        mAppExecutors.diskIO().execute(() -> {
+
+        List<Product>products = mProductDao.getMostSoldItems();
+
+        for (Product p : products) {
+                //image
+                p.setProductImages(mProductImageDao.getProductImage(p.getId()));
+                //description
+                p.setProductDescriptions(mProductDescriptionDao.getProductDescription(p.getId()));
+                //tags
+                p.setTags(mProductDao.getProductTags(p.getId()));
+            }
+            mAppExecutors.mainThread().execute(() -> callback.onSuccess(products));
         });
     }
 
@@ -151,7 +164,6 @@ public class ProductLocalDataSource {
             }
             mAppExecutors.mainThread().execute(() -> callback.onSuccess(products));
         });
-
     }
 
     public void getAllTags(ProductsRepository.GetAllTagsCallback callback) {

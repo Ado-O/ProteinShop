@@ -131,18 +131,13 @@ public class RemoteToLocal {
 
 
     public static List<MostSoldItem> mostSoldItemsConverter(
-            BaseResponse baseResponse,
-            List<ProductResponse> productsResponses) {
+            BaseResponse baseResponse) {
 
         List<MostSoldItem> mostSoldItems = new ArrayList<>();
 
-        for (int position : baseResponse.getMostSoldItem()) {
-            for (ProductResponse p : productsResponses) {
-                if (position == p.getId()) {
-                    mostSoldItems.add(new MostSoldItem(p.getId()));
-                    break;
-                }
-            }
+        for (int id : baseResponse.getMostSoldItem()) {
+            mostSoldItems.add(new MostSoldItem(id));
+
         }
         return mostSoldItems;
 
