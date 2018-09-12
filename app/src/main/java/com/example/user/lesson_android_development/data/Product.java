@@ -7,11 +7,13 @@ import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.Serializable;
+import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity(tableName = "products_table")
-public class Product {
+public class Product implements Serializable{
 
     @ColumnInfo(name = "_id")
     @PrimaryKey(autoGenerate = true)
@@ -132,6 +134,5 @@ public class Product {
     public void setCartItems(List<CartItem> cartItems) {
         mCartItems = cartItems;
     }
-
 
 }

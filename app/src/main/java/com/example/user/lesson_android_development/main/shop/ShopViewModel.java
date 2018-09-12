@@ -8,6 +8,7 @@ import android.databinding.ObservableList;
 import android.support.annotation.NonNull;
 
 import com.example.user.lesson_android_development.data.Product;
+import com.example.user.lesson_android_development.data.Tag;
 import com.example.user.lesson_android_development.data.storage.ProductsRepository;
 import com.example.user.lesson_android_development.util.SingleLiveEvent;
 
@@ -39,31 +40,34 @@ public class ShopViewModel extends AndroidViewModel {
     /**
      * product
      */
-    public void startProduct() {
-      if (mProducts.isEmpty()){
-          getProducts();
-      }
+    public void startProduct(long tadId) {
+       if (mProducts.isEmpty()) {
+            getProducts();
+        } else {
+           getFilterItem(tadId);
+       }
     }
 
     private void getProducts() {
-      mProductsRepository.getProductsContent(new ProductsRepository.GetProductsCallback() {
-          @Override
-          public void onSuccess(List<Product> products) {
-              mProducts.clear();
-              mProducts.addAll(products);
-              mError.set(products.isEmpty());
-          }
+        mProductsRepository.getProductsContent(new ProductsRepository.GetProductsCallback() {
+            @Override
+            public void onSuccess(List<Product> products) {
+                mProducts.clear();
+                mProducts.addAll(products);
+                mError.set(products.isEmpty());
+            }
 
-          @Override
-          public void onError() {}
-      });
+            @Override
+            public void onError() {
+            }
+        });
     }
 
     /**
      * bestSelling
      */
     public void startBestSelling() {
-        if (mBestSellingItems.isEmpty()){
+        if (mBestSellingItems.isEmpty()) {
             getBestSelling();
         }
     }
@@ -84,10 +88,24 @@ public class ShopViewModel extends AndroidViewModel {
         });
     }
 
-    public void onProductClickEvent() {
 
+    public void getFilterItem(long tagId) {
+        mProductsRepository.getFilteredProducts(tagId, new ProductsRepository.GetFilterCallback() {
+            @Override
+            public void onSuccess(List<Product> products) {
+                mProducts.clear();
+                mProducts.addAll(products);
+                mError.set(products.isEmpty());
+            }
 
+            @Override
+            public void onError() {
+
+            }
+        });
     }
+
+    //TODO onProductClickEvent
 
     public SingleLiveEvent<Product> getOpenShopEvent() {
         return mOpenShopEvent;

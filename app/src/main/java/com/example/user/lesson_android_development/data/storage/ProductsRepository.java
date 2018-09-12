@@ -72,8 +72,8 @@ public class ProductsRepository {
     /*
     filter
      */
-    public void getFilteredProducts(Tag tag, GetFilterCallback callback) {
-        mLocalDataSource.getFilteredProduct(tag, callback);
+    public void getFilteredProducts(long tagId, GetFilterCallback callback) {
+        mLocalDataSource.getFilteredProduct(tagId, callback);
     }
 
     /*

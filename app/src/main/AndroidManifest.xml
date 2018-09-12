@@ -19,8 +19,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".main.filter.FilterActivity" />
-        <activity android:name=".main.description.DescriptionActivity"></activity>
+
+        <activity android:name=".main.filter.FilterActivity"
+            android:theme="@style/Theme.AppCompat.Translucent"
+            />
+
+        <activity android:name=".main.description.DescriptionActivity"
+            android:launchMode = "singleInstance" ></activity>
     </application>
 
 </manifest>

@@ -16,9 +16,10 @@ import com.example.user.lesson_android_development.data.Product;
 import com.example.user.lesson_android_development.data.Tag;
 import com.example.user.lesson_android_development.databinding.FilterFragBinding;
 import com.example.user.lesson_android_development.util.RecyclerViewClickListener;
+import com.example.user.lesson_android_development.util.RecyclerViewClickListenerTag;
 import com.example.user.lesson_android_development.util.ViewModelFactory;
 
-public class FilterFragment extends Fragment implements RecyclerViewClickListener {
+public class FilterFragment extends Fragment implements RecyclerViewClickListenerTag {
 
     private static final String TAG = FilterFragment.class.getSimpleName();
 
@@ -49,7 +50,7 @@ public class FilterFragment extends Fragment implements RecyclerViewClickListene
 
     public void setupRecycle() {
 
-        FilterAdapter adapter = new FilterAdapter(mContext);
+        FilterAdapter adapter = new FilterAdapter(mContext, FilterFragment.this);
 
         mBinding.rvFilter.setLayoutManager(new LinearLayoutManager(
                 mContext,
@@ -60,9 +61,8 @@ public class FilterFragment extends Fragment implements RecyclerViewClickListene
     }
 
 
-
     @Override
-    public void recyclerViewListClicked(View v, Product product) {
-
+    public void recyclerViewTagClicked(View v, Tag tag) {
+        mViewModel.getOpenShopEvent().setValue(tag);
     }
 }

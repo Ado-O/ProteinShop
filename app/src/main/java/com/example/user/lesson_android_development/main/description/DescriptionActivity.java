@@ -1,38 +1,47 @@
 package com.example.user.lesson_android_development.main.description;
 
+
 import android.app.Activity;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.graphics.Paint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.example.user.lesson_android_development.R;
-import com.example.user.lesson_android_development.data.Description;
+import com.example.user.lesson_android_development.data.DescriptionList;
 import com.example.user.lesson_android_development.data.Product;
-import com.example.user.lesson_android_development.databinding.DescriptionScrollingBinding;
+import com.example.user.lesson_android_development.data.ProductDescription;
+import com.example.user.lesson_android_development.data.ProductImage;
+import com.example.user.lesson_android_development.databinding.DescriptionActBinding;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class DescriptionActivity extends AppCompatActivity {
 
     private static final String TAG = DescriptionActivity.class.getSimpleName();
 
-    private DescriptionScrollingBinding mDescriptionScrollingBinding;
+    private SlideImageAdapter mSlideImageAdapter;
+    private DescriptionActBinding mDescriptionActBinding;
 
-    private String mImg;
-    private String mNam;
-    private String mDsc;
-    private String mPrc;
+    private String mImg, mNam, mDsc, mPrc;
+
+    private List<ProductDescription> Desclist = new ArrayList<ProductDescription>();
+    private List<ProductImage> imageList = new ArrayList<>();
+
 
     public static void startActivity(Activity activity, Product product) {
 
         Intent intent = new Intent(activity, DescriptionActivity.class);
         intent.putExtra("image", product.getPictures());
         intent.putExtra("name", product.getTitle());
-        intent.putExtra("discount", product.getPrice());
-        intent.putExtra("price", product.getDiscounte());
+        intent.putExtra("discount", product.getDiscounte());
+        intent.putExtra("price", product.getPrice());
+        intent.putExtra("dscList", (Serializable) product.getProductDescriptions());
+        intent.putExtra("dscImage", (Serializable) product.getProductImages());
 
         activity.startActivity(intent);
 
@@ -43,10 +52,31 @@ public class DescriptionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.description_act);
 
-        mDescriptionScrollingBinding = DataBindingUtil.setContentView(this, R.layout.description_scrolling);
+        mDescriptionActBinding = DataBindingUtil.setContentView(this, R.layout.description_act);
 
-        //TODO add toolbar back array
         setupData();
+        setupToolbar();
+        setupImage();
+    }
+
+    /**
+     * Setting up the toolbar, toolbar actions & title
+     */
+    private void setupToolbar() {
+        //toolbar setup
+         setSupportActionBar(mDescriptionActBinding.tlb);
+        //setting up the back button on the toolbar
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+    }
+
+    /**
+     * OnClickListener for the toolbar back button
+     */
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     /**
@@ -58,10 +88,29 @@ public class DescriptionActivity extends AppCompatActivity {
         mDsc = getIntent().getExtras().getString("discount");
         mPrc = getIntent().getExtras().getString("price");
         mImg = getIntent().getExtras().getString("image");
+        Desclist = (List<ProductDescription>) getIntent().getSerializableExtra("dscList");
 
+        DescriptionList descriptionList = new DescriptionList(mNam, mPrc, mDsc, Desclist);
+        mDescriptionActBinding.setDescriptionList(descriptionList);
 
-        Description description = new Description(mNam, mDsc, mPrc);
-        mDescriptionScrollingBinding.setDescription(description);
+        //strikethrough discount
+        mDescriptionActBinding.tvDesDiscount.setPaintFlags(
+                mDescriptionActBinding.tvDesDiscount.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
     }
+
+    /**
+     * add image and slideImageAdapter
+     */
+    private void setupImage() {
+
+        imageList = (List<ProductImage>) getIntent().getSerializableExtra("dscImage");
+
+            mSlideImageAdapter = new SlideImageAdapter(DescriptionActivity.this, imageList);
+        mDescriptionActBinding.viewPager.setAdapter(mSlideImageAdapter);
+        mDescriptionActBinding.indicator.setupWithViewPager(mDescriptionActBinding.viewPager, true);
+
+    }
+
+
 }

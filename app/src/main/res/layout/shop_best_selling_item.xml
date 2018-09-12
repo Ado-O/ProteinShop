@@ -21,7 +21,8 @@
             android:layout_marginTop="15dp"
             android:layout_marginLeft="13dp"
             android:layout_marginBottom="5dp"
-            android:textSize="@dimen/text"
+            android:textSize="18dp"
+            android:textColor="@color/darkTextHigh"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             android:text="Best selling"/>
@@ -40,8 +41,9 @@
             android:layout_marginTop="15dp"
             android:layout_marginLeft="13dp"
             android:layout_marginBottom="5dp"
-            android:textSize="@dimen/text"
+            android:textSize="18dp"
             android:text="Featured Stacks"
+            android:textColor="@color/darkTextHigh"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rv_bestSelling"/>
 

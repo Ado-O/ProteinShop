@@ -4,9 +4,13 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
 
 @Entity(tableName = "productdescription_table")
-public class ProductDescription {
+public class ProductDescription implements Serializable{
 
     @ColumnInfo(name = "_id")
     @PrimaryKey(autoGenerate = true)
@@ -67,4 +71,34 @@ public class ProductDescription {
     public void setDescription(String description) {
         mDescription = description;
     }
+
+//    @Override
+//    public int describeContents() {
+//        return 0;
+//    }
+//
+//    @Override
+//    public void writeToParcel(Parcel dest, int flags) {
+//        dest.writeLong(mProductId);
+//        dest.writeString(mName);
+//        dest.writeString(mDescription);
+//    }
+//
+//    public static final Parcelable.Creator<ProductDescription> CREATOR = new Parcelable.Creator<ProductDescription>() {
+//        @Override
+//        public ProductDescription createFromParcel(Parcel source) {
+//            return new ProductDescription(source);
+//        }
+//
+//        @Override
+//        public ProductDescription[] newArray(int size) {
+//            return new ProductDescription[size];
+//        }
+//    };
+//
+//    private ProductDescription(Parcel in) {
+//        mName = in.readString();
+//        mProductId = in.readLong();
+//        mDescription = in.readString();
+//    }
 }

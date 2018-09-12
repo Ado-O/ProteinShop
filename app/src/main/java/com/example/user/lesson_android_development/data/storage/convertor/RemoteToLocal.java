@@ -79,7 +79,8 @@ public class RemoteToLocal {
             List<SupplementsResponse> supplementsResponses) {
         List<ProductDescription> productDescriptions = new ArrayList<>();
 
-        if (productsResponse.getSuplements().size() > 1) {
+
+      //  if (productsResponse.getSuplements().size() > 1) {
             for (long sId : productsResponse.getSuplements()) { //get ever id from productResponse
                 for (SupplementsResponse s : supplementsResponses) { //get eventing from supplementResponse
                     if (sId == s.getId()) { //compare id which we get from productsResponse.getSuplements() to supplementResponse
@@ -88,9 +89,7 @@ public class RemoteToLocal {
                     }
                 }
             }
-        }
-
-
+        //}
         return productDescriptions;
     }
 

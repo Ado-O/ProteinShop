@@ -1,7 +1,9 @@
 package com.example.user.lesson_android_development.main.description;
 
 import android.databinding.BindingAdapter;
+import android.support.constraint.ConstraintLayout;
 import android.view.LayoutInflater;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -25,6 +27,7 @@ public class DescriptionBinding {
                 TextView view = (TextView) inflater.inflate(
                         R.layout.description, linearLayout, false
                 );
+
 
                 view.setText(p.getName());
                 linearLayout.addView(view);

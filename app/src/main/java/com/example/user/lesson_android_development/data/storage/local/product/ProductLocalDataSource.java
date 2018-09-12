@@ -150,9 +150,9 @@ public class ProductLocalDataSource {
         });
     }
 
-    public void getFilteredProduct(Tag tag, ProductsRepository.GetFilterCallback callback) {
+    public void getFilteredProduct(long tagId, ProductsRepository.GetFilterCallback callback) {
         mAppExecutors.diskIO().execute(() -> {
-            final List<Product> products = mProductDao.getFilteredProducts(tag.getId());
+            final List<Product> products = mProductDao.getFilteredProducts(tagId);
 
             for (Product p : products) {
                 //image

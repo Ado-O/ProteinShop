@@ -1,6 +1,8 @@
 package com.example.user.lesson_android_development.main.shop;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -14,10 +16,14 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.user.lesson_android_development.R;
+import com.example.user.lesson_android_development.data.Tag;
+import com.example.user.lesson_android_development.databinding.ShopFragBinding;
 import com.example.user.lesson_android_development.main.description.DescriptionActivity;
 import com.example.user.lesson_android_development.main.filter.FilterActivity;
 import com.example.user.lesson_android_development.util.ActivityUtils;
 import com.example.user.lesson_android_development.util.ViewModelFactory;
+
+import static com.example.user.lesson_android_development.BR.product;
 
 
 public class ShopActivity extends AppCompatActivity {
@@ -34,6 +40,7 @@ public class ShopActivity extends AppCompatActivity {
         mToolbar = findViewById(R.id.tb_main);
         mShopViewModel = ViewModelFactory.obtainViewModel(this, ShopViewModel.class);
 
+
         //Setup
         setupToolbar();
         setupFragment();
@@ -45,8 +52,12 @@ public class ShopActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == FilterActivity.RC_FILTER && resultCode == RESULT_OK) {
-            Log.e(TAG, data.getIntExtra("filter", 0) + "");
+            Log.e(TAG, String.valueOf(data.getExtras().get("filter")));
+
+            mShopViewModel.getFilterItem(data.getExtras().getLong("filter"));
+
         }
+
     }
 
     /**
@@ -57,7 +68,7 @@ public class ShopActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         //setting the toolbar title
         getSupportActionBar().setTitle("Shop");
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.clear_white);
+        //  getSupportActionBar().setHomeAsUpIndicator(R.drawable.clear_white);
         //setting up the back button on the toolbar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -102,6 +113,7 @@ public class ShopActivity extends AppCompatActivity {
                 getSupportFragmentManager(),
                 ShopFragment.newInstance(),
                 R.id.frag_shop
+
         );
     }
 
@@ -111,7 +123,7 @@ public class ShopActivity extends AppCompatActivity {
     private void setupEvents() {
 
         mShopViewModel.getOpenShopEvent().observe(ShopActivity.this, product ->
-                        DescriptionActivity.startActivity(ShopActivity.this, product)
+                DescriptionActivity.startActivity(ShopActivity.this, product)
         );
     }
 

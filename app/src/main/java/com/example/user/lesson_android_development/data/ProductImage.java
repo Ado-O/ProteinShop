@@ -5,8 +5,10 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity(tableName = "productimage_table")
-public class ProductImage {
+public class ProductImage implements Serializable{
 
     @ColumnInfo(name = "_id")
     @PrimaryKey(autoGenerate = true)

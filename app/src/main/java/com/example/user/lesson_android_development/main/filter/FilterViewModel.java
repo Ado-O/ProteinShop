@@ -22,7 +22,7 @@ public class FilterViewModel extends AndroidViewModel {
 
     public final ObservableBoolean mError = new ObservableBoolean(false);
 
-    private final SingleLiveEvent<Product> mOpenShopEvent = new SingleLiveEvent<>();
+    private final SingleLiveEvent<Tag> mOpenShopEvent = new SingleLiveEvent<>();
 
 
     public FilterViewModel(@NonNull Application application,
@@ -31,14 +31,16 @@ public class FilterViewModel extends AndroidViewModel {
         mProductsRepository = productsRepository;
     }
 
-
-    public void startFilter(){
-        if (mTags.isEmpty()){
+    /**
+     * get all tag
+     */
+    public void startFilter() {
+        if (mTags.isEmpty()) {
             getFilter();
         }
     }
 
-    private void getFilter(){
+    private void getFilter() {
         mProductsRepository.getAllTags(new ProductsRepository.GetAllTagsCallback() {
             @Override
             public void onSuccess(List<Tag> tags) {
@@ -55,7 +57,8 @@ public class FilterViewModel extends AndroidViewModel {
     }
 
 
-    public SingleLiveEvent<Product> getOpenShopEvent() {
+
+    public SingleLiveEvent<Tag> getOpenShopEvent() {
         return mOpenShopEvent;
     }
 }
