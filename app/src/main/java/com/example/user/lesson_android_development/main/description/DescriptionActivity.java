@@ -5,8 +5,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Paint;
+import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.user.lesson_android_development.R;
 import com.example.user.lesson_android_development.data.DescriptionList;
@@ -14,6 +16,7 @@ import com.example.user.lesson_android_development.data.Product;
 import com.example.user.lesson_android_development.data.ProductDescription;
 import com.example.user.lesson_android_development.data.ProductImage;
 import com.example.user.lesson_android_development.databinding.DescriptionActBinding;
+import com.example.user.lesson_android_development.main.card.BottomSheetFragment;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -29,7 +32,7 @@ public class DescriptionActivity extends AppCompatActivity {
 
     private String mImg, mNam, mDsc, mPrc;
 
-    private List<ProductDescription> Desclist = new ArrayList<ProductDescription>();
+    private List<ProductDescription> Desclist = new ArrayList<>();
     private List<ProductImage> imageList = new ArrayList<>();
 
 
@@ -64,7 +67,7 @@ public class DescriptionActivity extends AppCompatActivity {
      */
     private void setupToolbar() {
         //toolbar setup
-         setSupportActionBar(mDescriptionActBinding.tlb);
+        setSupportActionBar(mDescriptionActBinding.tlb);
         //setting up the back button on the toolbar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -90,7 +93,7 @@ public class DescriptionActivity extends AppCompatActivity {
         mImg = getIntent().getExtras().getString("image");
         Desclist = (List<ProductDescription>) getIntent().getSerializableExtra("dscList");
 
-        DescriptionList descriptionList = new DescriptionList(mNam, mPrc, mDsc, Desclist);
+        DescriptionList descriptionList = new DescriptionList("",mNam, mPrc, mDsc, Desclist);
         mDescriptionActBinding.setDescriptionList(descriptionList);
 
         //strikethrough discount
@@ -106,9 +109,19 @@ public class DescriptionActivity extends AppCompatActivity {
 
         imageList = (List<ProductImage>) getIntent().getSerializableExtra("dscImage");
 
-            mSlideImageAdapter = new SlideImageAdapter(DescriptionActivity.this, imageList);
+        mSlideImageAdapter = new SlideImageAdapter(DescriptionActivity.this, imageList);
         mDescriptionActBinding.viewPager.setAdapter(mSlideImageAdapter);
         mDescriptionActBinding.indicator.setupWithViewPager(mDescriptionActBinding.viewPager, true);
+
+    }
+
+    /**
+     * onCLick floatActionButtom where we get bottomSheetFragment
+     */
+    public void onClickDescFAB(View view) {
+
+        BottomSheetDialogFragment bottomSheetDialogFragment = new BottomSheetFragment();
+        bottomSheetDialogFragment.show(getSupportFragmentManager(), "Bottom Sheet Dialog Fragment");
 
     }
 

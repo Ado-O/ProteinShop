@@ -16,9 +16,11 @@ import android.view.ViewGroup;
 import com.example.user.lesson_android_development.data.Product;
 import com.example.user.lesson_android_development.data.Tag;
 import com.example.user.lesson_android_development.databinding.ShopFragBinding;
+import com.example.user.lesson_android_development.main.card.CardActivity;
 import com.example.user.lesson_android_development.main.filter.FilterViewModel;
 import com.example.user.lesson_android_development.util.RecyclerViewClickListener;
 import com.example.user.lesson_android_development.util.ViewModelFactory;
+
 
 public class ShopFragment extends Fragment implements RecyclerViewClickListener {
 
@@ -47,7 +49,9 @@ public class ShopFragment extends Fragment implements RecyclerViewClickListener 
         mMainViewModelBestSelling = ViewModelFactory.obtainViewModel(getActivity(), ShopViewModel.class);
         mMainViewModelBestSelling.startBestSelling();
 
+
         setupRecycle();
+        onClickCheckout();
 
         return mBinding.getRoot();
     }
@@ -79,5 +83,15 @@ public class ShopFragment extends Fragment implements RecyclerViewClickListener 
     public void recyclerViewListClicked(View v, Product product) {
         mMainViewModelProduct.getOpenShopEvent().setValue(product);
         mMainViewModelBestSelling.getOpenShopEvent().setValue(product);
+    }
+
+    /**
+     * open second activity that is CardActivity
+     */
+    public void onClickCheckout() {
+        mBinding.btnCheckout.setOnClickListener(v -> {
+           CardActivity.startActivity(getActivity());
+        });
+
     }
 }

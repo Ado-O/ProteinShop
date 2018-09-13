@@ -1,29 +1,22 @@
 package com.example.user.lesson_android_development.main.shop;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
+import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.user.lesson_android_development.R;
-import com.example.user.lesson_android_development.data.Tag;
-import com.example.user.lesson_android_development.databinding.ShopFragBinding;
 import com.example.user.lesson_android_development.main.description.DescriptionActivity;
+import com.example.user.lesson_android_development.main.card.BottomSheetFragment;
 import com.example.user.lesson_android_development.main.filter.FilterActivity;
 import com.example.user.lesson_android_development.util.ActivityUtils;
 import com.example.user.lesson_android_development.util.ViewModelFactory;
-
-import static com.example.user.lesson_android_development.BR.product;
 
 
 public class ShopActivity extends AppCompatActivity {
@@ -39,7 +32,6 @@ public class ShopActivity extends AppCompatActivity {
 
         mToolbar = findViewById(R.id.tb_main);
         mShopViewModel = ViewModelFactory.obtainViewModel(this, ShopViewModel.class);
-
 
         //Setup
         setupToolbar();
@@ -125,13 +117,19 @@ public class ShopActivity extends AppCompatActivity {
         mShopViewModel.getOpenShopEvent().observe(ShopActivity.this, product ->
                 DescriptionActivity.startActivity(ShopActivity.this, product)
         );
+
+        mShopViewModel.getOpenShopEvent().observe(ShopActivity.this, product ->
+                BottomSheetFragment.startActivity(ShopActivity.this, product)
+        );
     }
 
     /**
      * FloatActionButton
      */
-    public void onClickFAB(View view) {
-        Toast.makeText(ShopActivity.this, "Float button", Toast.LENGTH_SHORT).show();
+    public void onClickMainFAB(View view) {
+       //TODO connect fab with bottomSheet
+//        BottomSheetDialogFragment bottomSheetDialogFragment = new BottomSheetFragment();
+//        bottomSheetDialogFragment.show(getSupportFragmentManager(), "Bottom Sheet Dialog Fragment");
 
     }
 

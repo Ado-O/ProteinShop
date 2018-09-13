@@ -79,6 +79,7 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="20dp"
+                    android:inputType="textMultiLine"
                     android:text="@{descriptionList.title}"
                     android:textColor="@color/darkTextHigh"
                     android:textSize="20dp"
@@ -138,7 +139,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
             android:layout_margin="10dp"
-            app:backgroundTint="#3D5AFE"
+            android:onClick="onClickDescFAB"
+            app:backgroundTint="@color/floatButton"
             app:srcCompat="@drawable/shopping_cart_white"
             tools:ignore="VectorDrawableCompat"/>
 

@@ -19,13 +19,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".main.filter.FilterActivity"
-            android:theme="@style/Theme.AppCompat.Translucent"
-            />
-
-        <activity android:name=".main.description.DescriptionActivity"
-            android:launchMode = "singleInstance" ></activity>
+        <activity
+            android:name=".main.filter.FilterActivity"
+            android:theme="@style/Theme.AppCompat.Translucent" />
+        <activity
+            android:name=".main.description.DescriptionActivity"
+            android:launchMode="singleInstance" />
+        <activity android:name=".main.card.CardActivity"/>
     </application>
 
 </manifest>

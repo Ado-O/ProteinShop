@@ -70,7 +70,7 @@
                 app:backgroundTint="@color/colorWhite"
                 app:fabSize="mini"
                 android:layout_margin="5dp"
-                android:onClick="onClickFAB"
+                android:onClick="onClickMainFAB"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/shopping_cart"
